@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:textSize="25dp"
+        android:layout_gravity="center_horizontal"
+        android:text="账单结算"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:paddingLeft="30dp"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="18dp"
+            android:text="流水id："
+            android:layout_width="150dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_pipeline_id"
+            android:textSize="18dp"
+            android:text="xxxxxxxxxxxxxxx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingLeft="30dp"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="18dp"
+            android:text="时间："
+            android:layout_width="150dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_create_time"
+            android:textSize="18dp"
+            android:text="xxxxxxxxxxxxxxx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingLeft="30dp"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="18dp"
+            android:text="原价："
+            android:layout_width="150dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_original_price"
+            android:textSize="18dp"
+            android:text="500"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingLeft="30dp"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="18dp"
+            android:text="让利："
+            android:layout_width="150dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_transfer_of_profits"
+            android:textSize="18dp"
+            android:text="40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingLeft="30dp"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="18dp"
+            android:text="应付："
+            android:layout_width="150dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_reality_price"
+            android:textSize="18dp"
+            android:text="80"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingLeft="30dp"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_profit_text"
+            android:textSize="18dp"
+            android:text="盈利："
+            android:layout_width="150dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_profit"
+            android:textSize="18dp"
+            android:text="****"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <Button
+        android:layout_margin="20dp"
+        android:text="完成"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        />
+</LinearLayout>

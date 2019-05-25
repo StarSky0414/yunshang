@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--<RelativeLayout
+        android:id="@+id/rl_add_goods"
+        android:layout_alignParentTop="true"
+        android:background="#ab292929"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+
+        <TextView
+            android:gravity="center_horizontal"
+            android:text="结算"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>-->
+
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+
+        android:id="@+id/recycle_view_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="55dp"
+        />
+
+    <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:background="#373939"
+        android:layout_width="match_parent"
+        android:layout_height="55dp">
+
+        <ImageView
+            android:id="@+id/iv_scan"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/scancode"
+            />
+
+        <TextView
+            android:id="@+id/tv_balance_base"
+            android:textSize="23dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="#d2d2d2"
+            android:gravity="center_horizontal"
+            android:text="200 - 100 = 100"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <ImageView
+            android:id="@+id/iv_goto_balance"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/balance_w"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>
+

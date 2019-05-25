@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <Button
+        android:id="@+id/bu_Scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="扫码"
+        />
+
+    <Button
+        android:id="@+id/bu_getGoodsInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:text="自动获取商品信息" />
+
+    <LinearLayout
+        android:id="@+id/ll_barcode"
+        android:layout_below="@id/bu_Scan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="条形码编号："
+            />
+        <EditText
+            android:inputType="number"
+            android:id="@+id/et_barcode"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_goodsName"
+        android:layout_below="@id/ll_barcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="商品名称："
+            />
+        <EditText
+            android:id="@+id/et_goodsName"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_nowPriceAll"
+        android:layout_below="@id/ll_goodsName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当前售价："
+            />
+        <EditText
+            android:inputType="number"
+            android:id="@+id/et_nowPriceAll"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_goods_stock_num"
+        android:layout_below="@id/ll_nowPriceAll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="库存数量："
+            />
+        <EditText
+            android:inputType="number"
+            android:id="@+id/et_goods_stock_num"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            />
+    </LinearLayout>
+
+    <!--<LinearLayout-->
+        <!--android:id="@+id/ll_outPrice"-->
+        <!--android:layout_below="@id/ll_intoGoodsNum"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="当前售价："-->
+            <!--/>-->
+        <!--<EditText-->
+            <!--android:id="@+id/et_outPrice"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="60dp"-->
+            <!--/>-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:id="@+id/ll_stock"-->
+        <!--android:layout_below="@id/ll_outPrice"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="当前库存："-->
+            <!--/>-->
+        <!--<EditText-->
+            <!--android:id="@+id/et_stock"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="60dp"-->
+            <!--/>-->
+    <!--</LinearLayout>-->
+
+
+    <Button
+        android:id="@+id/submit_goods_info"
+        android:layout_width="300px"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/ll_goods_stock_num"
+        android:text="提交"
+        />
+
+
+</RelativeLayout>

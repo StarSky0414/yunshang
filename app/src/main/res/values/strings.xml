@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">PhoneSweepCode</string>
+
+
+    <item name="tag_spinner_num" type="id"></item>
+    <item name="tag_second" type="id"></item>
+</resources>
