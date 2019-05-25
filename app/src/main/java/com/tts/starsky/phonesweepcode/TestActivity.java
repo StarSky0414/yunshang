@@ -20,7 +20,6 @@ public class TestActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 
-
         SalesController salesController = new SalesController();
         List<Sales> salesList = salesController.showSalesAll();
         for(Sales sales : salesList){
@@ -35,7 +34,5 @@ public class TestActivity extends Activity {
             }
             System.out.println("=================");
         }
-
-
     }
 }
