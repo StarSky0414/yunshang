@@ -24,7 +24,7 @@ public class SharedPreferencesUtil {
 
     private static String getBase(String key) {
         sp = context.getSharedPreferences("setting", MODE_PRIVATE);
-        return sp.getString(key,"");
+        return sp.getString(key,"0");
     }
 
 
@@ -52,8 +52,5 @@ public class SharedPreferencesUtil {
         long currentTimeMillis = System.currentTimeMillis();
         setBase(BACKUP_SQL,String.valueOf(currentTimeMillis));
     }
-
-
-
 
 }

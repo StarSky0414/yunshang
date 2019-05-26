@@ -12,12 +12,15 @@ public class UpFile {
 
     public void upfile(String upLoadeFile,String upPhotoPath) {
 
-        OSSClient oss = InitOssClient.ossClient;
+        OSSClient oss =null;
 
         System.out.println("oss     ===========================");
         // 构造上传请求。
         PutObjectRequest put = new PutObjectRequest("thethreestooges", upPhotoPath, upLoadeFile);
         try {
+            do {
+                oss = InitOssClient.ossClient;
+            }while (oss == null);
             PutObjectResult putResult = oss.putObject(put);
             Log.d("PutObject", "UploadSuccess");
             Log.d("ETag", putResult.getETag());
