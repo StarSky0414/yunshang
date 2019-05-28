@@ -53,16 +53,6 @@ public class FunctionActivity extends Activity implements View.OnClickListener {
         findView();
         init();
 
-
-//        OkhttpUtil okhttpUtil = new OkhttpUtil(this);
-//        OkhttpUtil instance = OkhttpUtil.getInstance();
-//        instance.download(url, mSDCardPath);
-//        doHandler();
-
-//        OkHttpUtil okHttpUtil = new OkHttpUtil();
-//        okHttpUtil.initOkHttp();
-//        okHttpUtil.downFile(url, mSDCardPath);
-//    }
     }
 
     private void init() {

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -112,7 +113,8 @@ public class GoodsIntoActivity extends Activity implements View.OnClickListener,
     }
 
     /**
-     *  按钮点击事件
+     * 按钮点击事件
+     *
      * @param v 点击的视图
      */
     @Override
@@ -122,9 +124,24 @@ public class GoodsIntoActivity extends Activity implements View.OnClickListener,
                 new IntentIntegrator(this).initiateScan();
                 break;
             case R.id.submit_goods_info:
+                if (!noNullCheck()) {
+                    Toast.makeText(this, "请填完信息", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 setGoodsStock();
+                et_intoPriceAll.setText("");
+                et_intoGoodsNum.setText("");
+                et_barcode.setText("");
+                et_goodsName.setText("");
                 break;
         }
+    }
+
+    private boolean noNullCheck() {
+        if (et_intoPriceAll.getText().toString().equals("") || et_intoGoodsNum.getText().toString().equals("") || et_barcode.getText().toString().equals("") || et_goodsName.getText().toString().equals("")) {
+            return false;
+        }
+        return true;
     }
 
 }

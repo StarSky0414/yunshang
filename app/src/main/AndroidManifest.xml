@@ -46,7 +46,7 @@
 
         <activity android:name=".view.GoodsIntoActivity"/>
         <activity android:name=".view.GoodsInfoActivity"/>
-        <activity android:name=".view.UpdataAppActivity">
+        <activity android:name=".discountActivity">
 
         </activity>
 

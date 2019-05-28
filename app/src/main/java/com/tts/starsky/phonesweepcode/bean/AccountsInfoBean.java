@@ -13,16 +13,16 @@
 //    // 商品信息
 ////    private GoodsInfo goodsInfo;
 //    // 折扣信息
-////    private Discount discount;
+////    private Discount discount_main;
 //    // 商品订购列表
 //    private List<Data> dataList;
 //
 //    public AccountsInfoBean() {
 //    }
 //
-////    public AccountsInfoBean(GoodsInfo goodsInfo, Discount discount, List<Data> dataList) {
+////    public AccountsInfoBean(GoodsInfo goodsInfo, Discount discount_main, List<Data> dataList) {
 ////        this.goodsInfo = goodsInfo;
-////        this.discount = discount;
+////        this.discount_main = discount_main;
 ////        this.dataList = dataList;
 ////    }
 //
@@ -35,11 +35,11 @@
 ////    }
 //
 //    public Discount getDiscount() {
-//        return discount;
+//        return discount_main;
 //    }
 //
-//    public void setDiscount(Discount discount) {
-//        this.discount = discount;
+//    public void setDiscount(Discount discount_main) {
+//        this.discount_main = discount_main;
 //    }
 //
 //    public List<Data> getDataList() {
@@ -54,7 +54,7 @@
 //    public String toString() {
 //        return "AccountsInfoBean{" +
 ////                "goodsInfo=" + goodsInfo +
-//                ", discount=" + discount +
+//                ", discount_main=" + discount_main +
 //                ", dataList=" + dataList +
 //                '}';
 //    }
