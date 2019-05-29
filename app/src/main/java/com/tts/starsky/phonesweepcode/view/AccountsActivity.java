@@ -1,11 +1,14 @@
 package com.tts.starsky.phonesweepcode.view;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -27,7 +30,7 @@ import com.tts.starsky.phonesweepcode.db.provider.GoodsInfoProvider;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccountsActivity extends Activity implements View.OnClickListener{
+public class AccountsActivity extends Activity implements View.OnClickListener {
 
     private AccountsAdapter accountsAdapter;
     private PlaceOrderController placeOrderController;
@@ -54,13 +57,13 @@ public class AccountsActivity extends Activity implements View.OnClickListener{
                 this, android.R.layout.simple_spinner_dropdown_item,
                 getData());
 
-        accountsAdapter = new AccountsAdapter(list, this, adapter,tv_balance_base);
+        accountsAdapter = new AccountsAdapter(list, this, adapter, tv_balance_base);
         view.setAdapter(accountsAdapter);
 
         tv_balance_base.setText(accountsAdapter.getExpression());
     }
 
-    private void findView(){
+    private void findView() {
         iv_goto_balance = (ImageView) findViewById(R.id.iv_goto_balance);
         iv_goto_balance.setOnClickListener(this);
 
@@ -68,12 +71,12 @@ public class AccountsActivity extends Activity implements View.OnClickListener{
         iv_scan.setOnClickListener(this);
 
         tv_balance_base = (TextView) findViewById(R.id.tv_balance_base);
-
     }
 
     /**
-     *  下拉列表数据转换
-     * @return  arrayAdapter使用的List
+     * 下拉列表数据转换
+     *
+     * @return arrayAdapter使用的List
      */
     private List<String> getData() {
         List<Discount> discountData = Init.discounts;
@@ -93,18 +96,20 @@ public class AccountsActivity extends Activity implements View.OnClickListener{
         try {
             // 当前第几个
             tag = (int) v.getTag();
-        }catch (NullPointerException n){ }
+        } catch (NullPointerException n) {
+        }
         // 哪个控件点击了
         switch (v.getId()) {
             case R.id.iv_goods_num_add:
+//                Integer integer = Integer.valueOf(et_goods_num.getText().toString());
                 int oldNum = accountsAdapter.getGoodsNum(tag);
                 int num = accountsAdapter.addGoodsNum(tag);
-                if (oldNum == num){
+                if (oldNum == num) {
                     Toast.makeText(this, "请检查库存数量", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 accountsAdapter.notifyItemChanged(tag);
-                AccountsAdapter.flashSign=true;
+                AccountsAdapter.flashSign = true;
                 tv_balance_base.setText(accountsAdapter.getExpression());
                 break;
             case R.id.iv_goods_num_cut:
@@ -114,7 +119,7 @@ public class AccountsActivity extends Activity implements View.OnClickListener{
                     accountsAdapter.removeGoods(tag);
                 } else {
                     accountsAdapter.notifyItemChanged(tag);
-                    AccountsAdapter.flashSign=true;
+                    AccountsAdapter.flashSign = true;
                 }
                 tv_balance_base.setText(accountsAdapter.getExpression());
                 break;
@@ -122,11 +127,37 @@ public class AccountsActivity extends Activity implements View.OnClickListener{
                 new IntentIntegrator(this).initiateScan();
                 break;
             case R.id.iv_goto_balance:
-                String jsonString = JSON.toJSONString(accountsAdapter.getItemDataList());
-                Intent intent = new Intent(this, BillActivity.class);
-                intent.putExtra("dataList",jsonString);
-                startActivity(intent);
+                AlertDialog.Builder builder = new AlertDialog.Builder(AccountsActivity.this);
+                builder.setTitle("商品结算");
+                View view = LayoutInflater.from(AccountsActivity.this).inflate(R.layout.dialog, null);
+                builder.setView(view);
+                final EditText et_changed_reality_make_collections = (EditText) view.findViewById(R.id.et_changed_reality_make_collections);
+                TextView tv_reality_make_collections = (TextView) view.findViewById(R.id.tv_reality_make_collections);
 
+                String[] split = tv_balance_base.getText().toString().split("= ");
+                String s = split[split.length - 1];
+                tv_reality_make_collections.setText(s);
+
+                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String string = et_changed_reality_make_collections.getText().toString();
+
+                        String jsonString = JSON.toJSONString(accountsAdapter.getItemDataList());
+                        Intent intent = new Intent(AccountsActivity.this, BillActivity.class);
+                        intent.putExtra("dataList", jsonString);
+                        intent.putExtra("stopCut", Double.valueOf(string));
+                        startActivity(intent);
+
+                    }
+                });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.show();
         }
     }
 
@@ -145,7 +176,7 @@ public class AccountsActivity extends Activity implements View.OnClickListener{
 //            GoodsInfo goodsInfo = new GoodsInfo(theresult, theresult, "冰红茶", 10, 20);
             GoodsInfoProvider goodsInfoProvider = new GoodsInfoProvider();
             GoodsInfo goodsInfo = goodsInfoProvider.goodsQueryByBrCode(theresult);
-            accountsAdapter.addItemList(goodsInfo.getGoodsName(),goodsInfo.getNowPrice(),goodsInfo.getGoodsBarCode(),goodsInfo.getNewStockNum());
+            accountsAdapter.addItemList(goodsInfo.getGoodsName(), goodsInfo.getNowPrice(), goodsInfo.getGoodsBarCode(), goodsInfo.getNewStockNum());
 
         }
     }

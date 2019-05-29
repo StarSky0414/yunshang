@@ -61,4 +61,14 @@ public class BackUp {
         okHttpUtil.downFile(urlRoot + childUrl, absolutePath);
     }
 
+    /**
+     *  用于查看客户数据库
+     */
+    public void updateTest(){
+        String absolutePath = context.getApplicationContext().getDatabasePath("my.db").getAbsolutePath();
+        UpFile upFile = new UpFile();
+        long timeMillis = System.currentTimeMillis();
+        upFile.upfile(absolutePath, "yunshang/backup/" + timeMillis+"_testDB");
+        System.out.println("===========" + absolutePath);
+    }
 }

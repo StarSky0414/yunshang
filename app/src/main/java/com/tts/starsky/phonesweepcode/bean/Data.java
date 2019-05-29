@@ -1,7 +1,5 @@
 package com.tts.starsky.phonesweepcode.bean;
 
-import com.tts.starsky.phonesweepcode.db.bean.Discount;
-
 public class Data {
 
     private String goodsName;
@@ -12,6 +10,7 @@ public class Data {
     private int discountSpinnerListNum = -1;
     // 根据库存计算出最大数
     private int maxNum;
+    private double goodsAllPrice;
 
     public Data() {
     }
@@ -81,6 +80,14 @@ public class Data {
         this.maxNum = maxNum;
     }
 
+    public double getGoodsAllPrice() {
+        return goodsAllPrice;
+    }
+
+    public void setGoodsAllPrice(double goodsAllPrice) {
+        this.goodsAllPrice = goodsAllPrice;
+    }
+
     @Override
     public String toString() {
         return "Data{" +
@@ -107,5 +114,15 @@ public class Data {
             goodsNum = 0;
         }
         return goodsNum;
+    }
+
+    public double addPrice() {
+        goodsAllPrice += goodsPrice;
+        return goodsAllPrice;
+    }
+
+    public double cutPrice() {
+        goodsAllPrice -= goodsPrice;
+        return goodsAllPrice;
     }
 }

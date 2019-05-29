@@ -36,16 +36,20 @@ public class BillActivity extends Activity {
 
         Intent intent = getIntent();
         String dataList = intent.getStringExtra("dataList");
+        double stopCut = intent.getDoubleExtra("stopCut",0); //实际收款
         List<Data> data = JSON.parseArray(dataList, Data.class);
 
         BillController billController = new BillController(data);
         final BillBean billBean = billController.makeBill();
+        double effectivelyPrice = billBean.getEffectivelyPrice(); //应付
+        final double settlementAndProfitConcession = effectivelyPrice - stopCut; // 结算时候让利部分
         findView();
         tv_pipeline_id.setText(billBean.getId());
         tv_create_time.setText(billBean.getCreateTime());
         tv_original_price.setText(String.format("%.2f", billBean.getPrice()));
-        tv_transfer_of_profits.setText(String.format("%.2f", billBean.getTransferOfProfits()));
-        tv_reality_price.setText(String.format("%.2f", billBean.getEffectivelyPrice()));
+        //让利
+        tv_transfer_of_profits.setText(String.format("%.2f", billBean.getTransferOfProfits()+settlementAndProfitConcession));
+        tv_reality_price.setText(String.format("%.2f", stopCut));
         tv_profit.setText("*******");
 
         tv_profit_text.setOnTouchListener(new View.OnTouchListener() {
@@ -56,7 +60,7 @@ public class BillActivity extends Activity {
                 if (action == MotionEvent.ACTION_DOWN) {
 
                     Toast.makeText(BillActivity.this, "按下", Toast.LENGTH_SHORT).show();
-                    tv_profit.setText(String.format("%.2f", billBean.getProfit()));
+                    tv_profit.setText(String.format("%.2f", billBean.getProfit()-settlementAndProfitConcession));
 // 按下 处理相关逻辑
                 } else  {
                     Toast.makeText(BillActivity.this, "松开", Toast.LENGTH_SHORT).show();

@@ -138,8 +138,8 @@ public class AccountsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public int getGoodsNum(int tag) {
-        int goodsNum = itemDataList.get(tag).getGoodsNum();
-        return goodsNum;
+        
+        return 0;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -176,6 +176,7 @@ public class AccountsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             goodsPriceSum += goodsPrice * goodsNum;
             goodsDisconutPriceSum += (goodsDisconutPrice != -1 ? goodsDisconutPrice : goodsPrice) * goodsNum;
         }
+//        String s = String.format("%.1f - %.1f = %.1f", goodsPriceSum, goodsPriceSum - goodsDisconutPriceSum, goodsDisconutPriceSum);
         String s = String.format("%.1f - %.1f = %.1f", goodsPriceSum, goodsPriceSum - goodsDisconutPriceSum, goodsDisconutPriceSum);
         return s;
     }

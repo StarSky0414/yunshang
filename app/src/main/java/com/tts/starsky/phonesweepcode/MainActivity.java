@@ -1,138 +1,80 @@
 package com.tts.starsky.phonesweepcode;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
-import com.google.zxing.integration.android.IntentIntegrator;
-//import com.tts.starsky.phonesweepcode.db.DBBase;
-//import com.tts.starsky.phonesweepcode.db.DaoSession;
-//import com.tts.starsky.phonesweepcode.db.GoodsInfo;
-//import com.tts.starsky.phonesweepcode.db.GoodsInfoDao;
-import com.tts.starsky.phonesweepcode.controller.GoodsInfoController;
-import com.tts.starsky.phonesweepcode.db.DBBase;
-import com.tts.starsky.phonesweepcode.db.bean.GoodsInfo;
-import com.tts.starsky.phonesweepcode.db.bean.GoodsStock;
-import com.tts.starsky.phonesweepcode.db.dao.DaoSession;
-import com.tts.starsky.phonesweepcode.db.dao.GoodsInfoDao;
-import com.tts.starsky.phonesweepcode.db.provider.GoodsStockProvider;
-import com.tts.starsky.phonesweepcode.http.Goods;
-import com.tts.starsky.phonesweepcode.utile.OkHttpUtil;
+import com.tts.starsky.phonesweepcode.R;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-
-public class MainActivity extends Activity implements View.OnClickListener {
-
-    private Button bu_scan;
-    private Button bu_getGoodsInfo;
-    private Button submit_goods_info;
-    private EditText et_barcode;
-    private EditText et_goodsName;
-    private EditText et_intoPriceAll;
-    private EditText et_intoGoodsNum;
-    private String theresult;
-    private GoodsInfo goods_info;
-    private GoodsInfoController goodsInfoController;
-    private GoodsStockProvider goodsStockProvider;
-
+/**
+ * @author ZMC
+ * 三级联动主要是灵活的应用三维数组 
+ */
+public class MainActivity extends Activity {
+    private String province[] = new String[]{"江西","湖南"};
+    private Spinner spinner1,spinner2,spinner3;
+    private int provinceindex;
+    private String city [][] = {{"南昌","赣州"},{"长沙","湘潭"}};
+    private String counstryside [][][] = {{{"青山湖区","南昌县"},{"章贡区","赣县"}},{{"长沙县","沙县"},{"湘潭县","象限"}}};
+    ArrayAdapter<String> adapter1,adapter2,adapter3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        EventBus.getDefault().register(this);//订阅
         super.onCreate(savedInstanceState);
-        goodsInfoController = new GoodsInfoController();
-        goodsStockProvider = new GoodsStockProvider();
+        setContentView(R.layout.activity_test);
+        spinner1 = (Spinner) findViewById(R.id.spn);
+        adapter1 = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line,province);
+        spinner1.setAdapter(adapter1);
 
-        setContentView(R.layout.activity_main);
-        initView();
+        spinner2  = (Spinner)findViewById(R.id.city);
+        adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line,city[0]);
+        spinner2.setAdapter(adapter2);
+
+        spinner3 = (Spinner)findViewById(R.id.counstryside);
+        adapter3 = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line,counstryside[0][0]);
+        spinner3.setAdapter(adapter3);
+        spinner1.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                // TODO Auto-generated method stub  
+                provinceindex = position;
+                adapter2 = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_dropdown_item_1line,city[position]);
+                spinner2.setAdapter(adapter2);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub  
+
+            }
+        });
+
+        spinner2.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                // TODO Auto-generated method stub  
+
+                adapter3 = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_dropdown_item_1line,counstryside[provinceindex][position]);
+                //adapter3.notifyDataSetChanged();  
+                spinner3.setAdapter(adapter3);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // TODO Auto-generated method stub  
+                //当时据为空的时候触发的  
+            }
+        });
+
+
     }
 
 
-    private void initView() {
-        bu_scan = (Button) findViewById(R.id.bu_Scan);
-        bu_scan.setOnClickListener(this);
-        bu_getGoodsInfo = (Button) findViewById(R.id.bu_getGoodsInfo);
-        bu_getGoodsInfo.setOnClickListener(this);
-        submit_goods_info = (Button) findViewById(R.id.submit_goods_info);
-        submit_goods_info.setOnClickListener(this);
-
-        et_barcode = (EditText) findViewById(R.id.et_barcode);
-        et_goodsName = (EditText) findViewById(R.id.et_goodsName);
-        et_intoPriceAll = (EditText) findViewById(R.id.et_intoPriceAll);
-        et_intoGoodsNum = (EditText) findViewById(R.id.et_intoGoodsNum);
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (data != null) {
-            Bundle bundle = data.getExtras();
-            theresult = bundle.getString("SCAN_RESULT");
-            Toast.makeText(this, theresult, Toast.LENGTH_SHORT).show();
-            System.out.println("==============" + theresult);
-            et_barcode.setText(theresult);
-            Toast.makeText(this, "数据请求中，请稍后。", Toast.LENGTH_SHORT).show();
-            queryGoodsInfoByDB(theresult);
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.bu_Scan:
-                new IntentIntegrator(this).initiateScan();
-                break;
-            case R.id.bu_getGoodsInfo:
-                OkHttpUtil okHttpUtil = new OkHttpUtil();
-//                okHttpUtil.init(theresult);
-                break;
-            case R.id.submit_goods_info:
-
-                // 编码号
-                String etBarcodeString = et_barcode.getText().toString();
-                // 进货总价
-                double etInfoAllPrice = Double.valueOf(et_intoPriceAll.getText().toString());
-                // 进货数量
-                Integer etIntoGoodNum = Integer.valueOf(et_intoGoodsNum.getText().toString());
-
-                GoodsStock goodsStock = new GoodsStock();
-                goodsStock.setGoodsId(etBarcodeString);
-                goodsStock.setIntoStockNum(etIntoGoodNum);
-                goodsStock.setIntoStockPrice(etInfoAllPrice/etIntoGoodNum);
-                goodsStock.setResidueGoodsNum(goodsStock.getIntoStockNum());
-
-                goodsStockProvider.goodsStockInsert(goods_info, goodsStock);
-                break;
-        }
-    }
-
-    /**
-     * 网络数据请求回调
-     *
-     * @param goods 商品编码
-     */
-    @Subscribe
-    public void queryResult(Goods goods) {
-        String s = goods.toString();
-        System.out.println("==========" + s);
-        et_goodsName.setText(goods.getGoodsName());
-    }
-
-    private void queryGoodsInfoByDB(String barcode) {
-        DBBase dbBase = DBBase.getDBBase();
-        DaoSession dbSession = dbBase.getDBSession();
-        goods_info = dbSession.getGoodsInfoDao().queryBuilder().where(GoodsInfoDao.Properties.GoodsBarCode.eq(barcode)).unique();
-        if (goods_info == null) {
-            et_goodsName.setHint("未添加数据");
-            goods_info.setGoodsBarCode(barcode);
-        } else {
-            et_goodsName.setText(goods_info.getGoodsName());
-        }
-        System.out.println("===========" + goods_info);
-    }
-}
+}  

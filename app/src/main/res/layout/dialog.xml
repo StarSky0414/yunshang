@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp"
+    >
+
+
+    <LinearLayout
+        android:id="@+id/ll_reality_make_collections"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_reality_make_collections_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="实际收款：" />
+
+        <TextView
+            android:id="@+id/tv_reality_make_collections"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="xxx" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_reality_make_collections"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_changed_reality_make_collections_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="实际收款：" />
+
+        <EditText
+            android:id="@+id/et_changed_reality_make_collections"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="若无调整省略即可"
+            android:textSize="15dp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

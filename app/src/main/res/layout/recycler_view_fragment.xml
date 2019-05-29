@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
     <!--<RelativeLayout
         android:id="@+id/rl_add_goods"
@@ -23,15 +23,17 @@
 
         android:id="@+id/recycle_view_item"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="55dp"
+
         />
 
+
     <RelativeLayout
-        android:layout_alignParentBottom="true"
-        android:background="#373939"
         android:layout_width="match_parent"
-        android:layout_height="55dp">
+        android:layout_height="55dp"
+        android:layout_alignParentBottom="true"
+        android:background="#373939">
 
         <ImageView
             android:id="@+id/iv_scan"
@@ -39,30 +41,28 @@
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/scancode"
-            />
+            android:background="@drawable/scancode" />
 
         <TextView
             android:id="@+id/tv_balance_base"
-            android:textSize="23dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:textColor="#d2d2d2"
             android:gravity="center_horizontal"
             android:text="200 - 100 = 100"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textColor="#d2d2d2"
+            android:textSize="23dp" />
 
 
         <ImageView
             android:id="@+id/iv_goto_balance"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="30dp"
-            android:background="@drawable/balance_w"
-            />
+            android:background="@drawable/balance_w" />
     </RelativeLayout>
 
 </RelativeLayout>

@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.tts.starsky.phonesweepcode.bean.DownEvenBusSign;
 import com.tts.starsky.phonesweepcode.controller.FunctionController;
+import com.tts.starsky.phonesweepcode.db.BackUp;
+import com.tts.starsky.phonesweepcode.oss.UpFile;
 import com.tts.starsky.phonesweepcode.utile.OkHttpUtil;
 import com.tts.starsky.phonesweepcode.view.AccountsActivity;
 import com.tts.starsky.phonesweepcode.view.GoodsInfoActivity;
@@ -102,6 +104,9 @@ public class FunctionActivity extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.rl_about_me_main:
+                new BackUp(this).updateTest();
+                Toast.makeText(this, "上传测试文件完成", Toast.LENGTH_SHORT).show();
+                break;
 
 
         }
