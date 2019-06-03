@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -21,7 +22,7 @@ import com.tts.starsky.phonesweepcode.db.provider.GoodsStockProvider;
 public class GoodsIntoActivity extends Activity implements View.OnClickListener, DialogInterface.OnClickListener {
 
     private Button bu_scan;
-    private Button submit_goods_info;
+    private TextView submit_goods_info;
     private EditText et_barcode;
     private EditText et_goodsName;
     private EditText et_intoPriceAll;
@@ -45,7 +46,7 @@ public class GoodsIntoActivity extends Activity implements View.OnClickListener,
     private void initView() {
         bu_scan = (Button) findViewById(R.id.bu_Scan);
         bu_scan.setOnClickListener(this);
-        submit_goods_info = (Button) findViewById(R.id.submit_goods_info);
+        submit_goods_info = (TextView) findViewById(R.id.submit_goods_info);
         submit_goods_info.setOnClickListener(this);
 
         et_barcode = (EditText) findViewById(R.id.et_barcode);
