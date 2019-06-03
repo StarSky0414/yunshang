@@ -8,14 +8,14 @@ import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
-import com.tts.starsky.phonesweepcode.db.bean.GoodsInfo;
 import com.tts.starsky.phonesweepcode.db.bean.Discount;
+import com.tts.starsky.phonesweepcode.db.bean.GoodsInfo;
 import com.tts.starsky.phonesweepcode.db.bean.GoodsStock;
 import com.tts.starsky.phonesweepcode.db.bean.Sales;
 import com.tts.starsky.phonesweepcode.db.bean.SalesToGoods;
 
-import com.tts.starsky.phonesweepcode.db.dao.GoodsInfoDao;
 import com.tts.starsky.phonesweepcode.db.dao.DiscountDao;
+import com.tts.starsky.phonesweepcode.db.dao.GoodsInfoDao;
 import com.tts.starsky.phonesweepcode.db.dao.GoodsStockDao;
 import com.tts.starsky.phonesweepcode.db.dao.SalesDao;
 import com.tts.starsky.phonesweepcode.db.dao.SalesToGoodsDao;
@@ -29,14 +29,14 @@ import com.tts.starsky.phonesweepcode.db.dao.SalesToGoodsDao;
  */
 public class DaoSession extends AbstractDaoSession {
 
-    private final DaoConfig goodsInfoDaoConfig;
     private final DaoConfig discountDaoConfig;
+    private final DaoConfig goodsInfoDaoConfig;
     private final DaoConfig goodsStockDaoConfig;
     private final DaoConfig salesDaoConfig;
     private final DaoConfig salesToGoodsDaoConfig;
 
-    private final GoodsInfoDao goodsInfoDao;
     private final DiscountDao discountDao;
+    private final GoodsInfoDao goodsInfoDao;
     private final GoodsStockDao goodsStockDao;
     private final SalesDao salesDao;
     private final SalesToGoodsDao salesToGoodsDao;
@@ -45,11 +45,11 @@ public class DaoSession extends AbstractDaoSession {
             daoConfigMap) {
         super(db);
 
-        goodsInfoDaoConfig = daoConfigMap.get(GoodsInfoDao.class).clone();
-        goodsInfoDaoConfig.initIdentityScope(type);
-
         discountDaoConfig = daoConfigMap.get(DiscountDao.class).clone();
         discountDaoConfig.initIdentityScope(type);
+
+        goodsInfoDaoConfig = daoConfigMap.get(GoodsInfoDao.class).clone();
+        goodsInfoDaoConfig.initIdentityScope(type);
 
         goodsStockDaoConfig = daoConfigMap.get(GoodsStockDao.class).clone();
         goodsStockDaoConfig.initIdentityScope(type);
@@ -60,33 +60,33 @@ public class DaoSession extends AbstractDaoSession {
         salesToGoodsDaoConfig = daoConfigMap.get(SalesToGoodsDao.class).clone();
         salesToGoodsDaoConfig.initIdentityScope(type);
 
-        goodsInfoDao = new GoodsInfoDao(goodsInfoDaoConfig, this);
         discountDao = new DiscountDao(discountDaoConfig, this);
+        goodsInfoDao = new GoodsInfoDao(goodsInfoDaoConfig, this);
         goodsStockDao = new GoodsStockDao(goodsStockDaoConfig, this);
         salesDao = new SalesDao(salesDaoConfig, this);
         salesToGoodsDao = new SalesToGoodsDao(salesToGoodsDaoConfig, this);
 
-        registerDao(GoodsInfo.class, goodsInfoDao);
         registerDao(Discount.class, discountDao);
+        registerDao(GoodsInfo.class, goodsInfoDao);
         registerDao(GoodsStock.class, goodsStockDao);
         registerDao(Sales.class, salesDao);
         registerDao(SalesToGoods.class, salesToGoodsDao);
     }
     
     public void clear() {
-        goodsInfoDaoConfig.clearIdentityScope();
         discountDaoConfig.clearIdentityScope();
+        goodsInfoDaoConfig.clearIdentityScope();
         goodsStockDaoConfig.clearIdentityScope();
         salesDaoConfig.clearIdentityScope();
         salesToGoodsDaoConfig.clearIdentityScope();
     }
 
-    public GoodsInfoDao getGoodsInfoDao() {
-        return goodsInfoDao;
-    }
-
     public DiscountDao getDiscountDao() {
         return discountDao;
+    }
+
+    public GoodsInfoDao getGoodsInfoDao() {
+        return goodsInfoDao;
     }
 
     public GoodsStockDao getGoodsStockDao() {

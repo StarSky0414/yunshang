@@ -34,7 +34,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
             android:layout_toLeftOf="@id/et_goods_num"
-            android:background="@drawable/cut_b" />
+            android:background="@mipmap/cut_b" />
 
         <EditText
             android:inputType="number"
@@ -55,7 +55,7 @@
             android:layout_marginLeft="2dp"
             android:layout_marginRight="20dp"
             android:layout_toLeftOf="@id/tv_goods_price"
-            android:src="@drawable/add_b" />
+            android:src="@mipmap/add_b" />
 
         <TextView
             android:textColor="#7b0000"
