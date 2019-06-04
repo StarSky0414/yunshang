@@ -13,16 +13,21 @@ import com.tts.starsky.phonesweepcode.bean.DownEvenBusSign;
 import com.tts.starsky.phonesweepcode.controller.FunctionController;
 import com.tts.starsky.phonesweepcode.db.BackUp;
 import com.tts.starsky.phonesweepcode.oss.UpFile;
+import com.tts.starsky.phonesweepcode.utile.GlideImageLoader;
 import com.tts.starsky.phonesweepcode.utile.OkHttpUtil;
 import com.tts.starsky.phonesweepcode.view.AccountsActivity;
 import com.tts.starsky.phonesweepcode.view.GoodsInfoActivity;
 import com.tts.starsky.phonesweepcode.view.GoodsIntoActivity;
 import com.white.progressview.CircleProgressView;
 import com.white.progressview.HorizontalProgressView;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.ArrayList;
 
 import static com.tts.starsky.phonesweepcode.bean.DownEvenBusSign.VSERSION_CHECK;
 
@@ -33,11 +38,11 @@ public class FunctionActivity extends Activity implements View.OnClickListener {
     private RelativeLayout rl_balance_main;
     private RelativeLayout rl_about_me_main;
     private RelativeLayout update_main;
-    private HorizontalProgressView horizontalProgressView;
     private CircleProgressView circleProgressView;
     private FunctionController functionController;
     private String mSDCardPath;
     private String url;
+    private Banner bn_banner;
 
 
     @Override
@@ -79,6 +84,13 @@ public class FunctionActivity extends Activity implements View.OnClickListener {
         update_main.setOnClickListener(this);
 
         circleProgressView = (CircleProgressView) findViewById(R.id.circle_progress_normal);
+
+        bn_banner = (Banner) findViewById(R.id.bn_banner);
+        bn_banner.setImageLoader(new GlideImageLoader());
+        bn_banner.isAutoPlay(true);
+        bn_banner.setDelayTime(5000);
+        bn_banner.setIndicatorGravity(BannerConfig.CENTER);
+        bn_banner.setImages(new ArrayList<String>());
     }
 
     @Override

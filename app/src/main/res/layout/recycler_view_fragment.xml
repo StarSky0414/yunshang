@@ -41,7 +41,7 @@
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/scancode" />
+            android:background="@mipmap/scancode" />
 
         <TextView
             android:id="@+id/tv_balance_base"
@@ -62,7 +62,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="30dp"
-            android:background="@drawable/balance_w" />
+            android:background="@mipmap/balance_w" />
     </RelativeLayout>
 
 </RelativeLayout>
