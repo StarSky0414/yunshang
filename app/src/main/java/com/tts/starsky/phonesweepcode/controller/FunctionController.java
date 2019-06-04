@@ -45,7 +45,7 @@ public class FunctionController implements OSSCompletedCallback<ListObjectsReque
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             Uri contentUri = FileProvider.getUriForFile(
                     context
-                    , "com.tts.starsky.phonesweepcode.fileprovider"
+                    , "${applicationId}.provider"
                     , apkFile);
             intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
         } else {

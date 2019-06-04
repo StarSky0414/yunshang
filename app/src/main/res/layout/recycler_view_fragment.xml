@@ -4,29 +4,37 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <!--<RelativeLayout
-        android:id="@+id/rl_add_goods"
-        android:layout_alignParentTop="true"
-        android:background="#ab292929"
+    <RelativeLayout
+        android:id="@+id/rl_title"
         android:layout_width="match_parent"
-        android:layout_height="55dp">
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <ImageView
+            android:id="@+id/iv_close_account"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/back_alpha" />
 
         <TextView
-            android:gravity="center_horizontal"
-            android:text="结算"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="结算商品"
+            android:textColor="#000"
+            android:textSize="16dp" />
+    </RelativeLayout>
 
-    </RelativeLayout>-->
-
-    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle_view_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="55dp"
-
-        />
+        android:layout_below="@id/rl_title" />
 
 
     <RelativeLayout
@@ -66,4 +74,19 @@
     </RelativeLayout>
 
 </RelativeLayout>
+
+    <!--<RelativeLayout
+            android:id="@+id/rl_add_goods"
+            android:layout_alignParentTop="true"
+            android:background="#ab292929"
+            android:layout_width="match_parent"
+            android:layout_height="55dp">
+
+            <TextView
+                android:gravity="center_horizontal"
+                android:text="结算"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>-->
 
