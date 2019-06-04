@@ -39,6 +39,7 @@ public class OkHttpUtil {
 //                Message message = Message.obtain();
 //                message.what = DOWNLOAD_FAIL;
 //                ctx.viewHandler.sendMessage(message);
+                System.out.println("========== 下载文件失败");
             }
 
             @Override

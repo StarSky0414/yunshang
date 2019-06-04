@@ -1,4 +1,4 @@
-package com.tts.starsky.phonesweepcode;
+package com.tts.starsky.phonesweepcode.view;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tts.starsky.phonesweepcode.R;
 import com.tts.starsky.phonesweepcode.bean.DownEvenBusSign;
 import com.tts.starsky.phonesweepcode.controller.FunctionController;
 import com.tts.starsky.phonesweepcode.db.BackUp;
@@ -37,6 +38,7 @@ public class FunctionActivity extends Activity implements View.OnClickListener {
     private RelativeLayout rl_goods_into_main;
     private RelativeLayout rl_balance_main;
     private RelativeLayout rl_about_me_main;
+    private RelativeLayout rl_discount_main;
     private RelativeLayout update_main;
     private CircleProgressView circleProgressView;
     private FunctionController functionController;
@@ -80,6 +82,9 @@ public class FunctionActivity extends Activity implements View.OnClickListener {
         rl_about_me_main = (RelativeLayout) findViewById(R.id.rl_about_me_main);
         rl_about_me_main.setOnClickListener(this);
 
+        rl_discount_main = (RelativeLayout) findViewById(R.id.rl_discount_main);
+        rl_discount_main.setOnClickListener(this);
+
         update_main = (RelativeLayout) findViewById(R.id.update_main);
         update_main.setOnClickListener(this);
 
@@ -105,6 +110,9 @@ public class FunctionActivity extends Activity implements View.OnClickListener {
             case R.id.rl_balance_main:
                 startActivity(new Intent(this, AccountsActivity.class));
                 break;
+            case R.id.rl_discount_main:
+                startActivity(new Intent(this, DiscountActivity.class));
+                break;
 
             case R.id.update_main:
                 TextView textView = (TextView) findViewById(R.id.tv_update_text);
@@ -119,8 +127,6 @@ public class FunctionActivity extends Activity implements View.OnClickListener {
                 new BackUp(this).updateTest();
                 Toast.makeText(this, "上传测试文件完成", Toast.LENGTH_SHORT).show();
                 break;
-
-
         }
     }
 

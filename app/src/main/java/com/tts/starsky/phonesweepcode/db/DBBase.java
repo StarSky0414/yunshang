@@ -28,7 +28,9 @@ public class DBBase {
         DBBase.context = context;
         QueryBuilder.LOG_SQL = true;
         QueryBuilder.LOG_VALUES = true;
-        dbBase=new DBBase();
+        do {
+            dbBase = new DBBase();
+        }while (dbBase ==null);
 //        MigrationHelper.DEBUG = true;//如果查看数据库更新的Log，请设置为true
 
     }

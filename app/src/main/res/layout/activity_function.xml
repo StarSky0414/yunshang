@@ -161,7 +161,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/rl_my_trends"
+                android:id="@+id/rl_discount_main"
                 android:layout_width="126dp"
                 android:layout_height="126dp"
                 android:layout_marginLeft="3dp"

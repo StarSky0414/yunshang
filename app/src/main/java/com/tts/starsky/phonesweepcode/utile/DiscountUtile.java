@@ -1,6 +1,6 @@
 package com.tts.starsky.phonesweepcode.utile;
 
-import com.tts.starsky.phonesweepcode.Init;
+import com.tts.starsky.phonesweepcode.view.Init;
 import com.tts.starsky.phonesweepcode.db.bean.Discount;
 
 import java.math.BigDecimal;

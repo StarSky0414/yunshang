@@ -19,7 +19,6 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.tts.starsky.phonesweepcode.bean.Data;
-import com.tts.starsky.phonesweepcode.Init;
 import com.tts.starsky.phonesweepcode.adapter.AccountsAdapter;
 import com.tts.starsky.phonesweepcode.R;
 import com.tts.starsky.phonesweepcode.controller.PlaceOrderController;
@@ -129,7 +128,7 @@ public class AccountsActivity extends Activity implements View.OnClickListener {
             case R.id.iv_goto_balance:
                 AlertDialog.Builder builder = new AlertDialog.Builder(AccountsActivity.this);
                 builder.setTitle("商品结算");
-                View view = LayoutInflater.from(AccountsActivity.this).inflate(R.layout.dialog, null);
+                View view = LayoutInflater.from(AccountsActivity.this).inflate(R.layout.dialog_account, null);
                 builder.setView(view);
                 final EditText et_changed_reality_make_collections = (EditText) view.findViewById(R.id.et_changed_reality_make_collections);
                 TextView tv_reality_make_collections = (TextView) view.findViewById(R.id.tv_reality_make_collections);

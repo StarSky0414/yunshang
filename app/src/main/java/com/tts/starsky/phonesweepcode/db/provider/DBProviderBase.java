@@ -4,14 +4,15 @@ import com.tts.starsky.phonesweepcode.db.DBBase;
 import com.tts.starsky.phonesweepcode.db.dao.DaoSession;
 
 /**
- *  DBProvider 抽象类 用于创建DBSession
+ * DBProvider 抽象类 用于创建DBSession
  */
 public class DBProviderBase {
 
     protected final DaoSession dbSession;
 
-    DBProviderBase(){
-        DBBase dbBase = DBBase.getDBBase();
+    DBProviderBase() {
+        DBBase dbBase = null;
+        dbBase = DBBase.getDBBase();
         dbSession = dbBase.getDBSession();
     }
 }

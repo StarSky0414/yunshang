@@ -1,4 +1,4 @@
-package com.tts.starsky.phonesweepcode;
+package com.tts.starsky.phonesweepcode.view;
 
 import android.app.Application;
 

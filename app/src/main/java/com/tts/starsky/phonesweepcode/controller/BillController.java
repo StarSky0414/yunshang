@@ -2,7 +2,7 @@ package com.tts.starsky.phonesweepcode.controller;
 
 
 import com.tts.starsky.phonesweepcode.bean.Data;
-import com.tts.starsky.phonesweepcode.Init;
+import com.tts.starsky.phonesweepcode.view.Init;
 import com.tts.starsky.phonesweepcode.bean.BillBean;
 import com.tts.starsky.phonesweepcode.db.bean.Discount;
 import com.tts.starsky.phonesweepcode.db.bean.GoodsStock;

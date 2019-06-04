@@ -4,4 +4,6 @@
 
     <item name="tag_spinner_num" type="id"></item>
     <item name="tag_second" type="id"></item>
+
+    <string name="discount_title">折扣列表</string>
 </resources>

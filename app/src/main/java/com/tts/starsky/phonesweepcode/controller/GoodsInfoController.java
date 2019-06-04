@@ -75,6 +75,7 @@ public class GoodsInfoController implements Callback{
         System.out.println("~~~~~~~~~~~~~~~~~`12");
         ResponseBody body = response.body();
         String string = body.string();
+        System.out.println("======="+string);
         JSONObject jsonObject = JSON.parseObject(string);
         Integer integer = jsonObject.getInteger("code");
         String data = jsonObject.getString("data");
