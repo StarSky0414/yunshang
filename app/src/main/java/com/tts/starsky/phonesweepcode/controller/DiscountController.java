@@ -24,4 +24,12 @@ public class DiscountController {
     public void addDiscount(Discount discount) {
         discountProvider.discountInsert(discount);
     }
+
+    public void deleDiscount(Long discountId) {
+        discountProvider.removeDiscountById(discountId);
+    }
+
+    public void changeDiscount(Discount discount){
+        discountProvider.discountChange(discount);
+    }
 }

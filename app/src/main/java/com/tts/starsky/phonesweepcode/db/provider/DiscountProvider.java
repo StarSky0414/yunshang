@@ -26,4 +26,11 @@ public class DiscountProvider extends DBProviderBase{
         return discountList;
     }
 
+    public void removeDiscountById(Long discountId) {
+        discountDao.deleteByKey(discountId);
+    }
+
+    public void changeDiscount(Discount discount){
+        discountDao.save(discount);
+    }
 }
