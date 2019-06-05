@@ -1,139 +1,85 @@
 package com.tts.starsky.phonesweepcode.view;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.ImageView;
 
-import com.alibaba.fastjson.JSON;
-import com.google.zxing.integration.android.IntentIntegrator;
+
 import com.tts.starsky.phonesweepcode.R;
-import com.tts.starsky.phonesweepcode.controller.GoodsInfoController;
-import com.tts.starsky.phonesweepcode.db.bean.GoodsInfo;
-import com.tts.starsky.phonesweepcode.http.Goods;
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
+import com.tts.starsky.phonesweepcode.adapter.ViewPagerAdapter;
+import com.tts.starsky.phonesweepcode.utile.NavitationLayout;
 
-/**
- *  商品信息类
- */
-public class GoodsInfoActivity extends Activity implements View.OnClickListener {
+import java.util.ArrayList;
+import java.util.List;
 
-    private Button bu_scan;
-    private Button bu_getGoodsInfo;
-    private TextView submit_goods_info;
-    private EditText et_barcode;
-    private EditText et_goodsName;
-    private EditText et_nowPriceAll;
-    private EditText et_goods_stock_num;
-    private String theresult;
-    private GoodsInfo goods_info;
-    private GoodsInfoController goodsInfoController;
+public class GoodsInfoActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private NavitationLayout nl_goods_info;
+    private ViewPager vp_goods_info;
+    private ViewPagerAdapter pagerAdapter;
+    private List<TypeFragment> goodsInfoFragmentList;
+    private ImageView iv_close_goods_info;
+    private int type;
+    private ImageView iv_add;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        EventBus.getDefault().register(this);//订阅
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        goodsInfoController = new GoodsInfoController();
         setContentView(R.layout.activity_goods_info);
         initView();
-
-        String goodsInfoString = getIntent().getStringExtra("goodsInfo");
-        if (goodsInfoString !=null && !goodsInfoString.equals("")){
-            GoodsInfo goodsInfo = JSON.parseObject(goodsInfoString, GoodsInfo.class);
-            et_barcode.setText(goodsInfo.getGoodsBarCode());
+        initData();
+        setOnClickListener();
         }
+
+    private void setOnClickListener() {
+        iv_close_goods_info.setOnClickListener(this);
+        iv_add.setOnClickListener(this);
     }
 
+    private void initData() {
+        Intent intent = getIntent();
+        type = intent.getIntExtra("type", 0);
+        String titles[] = new String[]{"洗化","护肤","彩妆"};
+        TypeFragment wash = new TypeFragment();
+        wash.setFirstType(1);
+        TypeFragment skincare = new TypeFragment();
+        skincare.setFirstType(2);
+        TypeFragment beautiful = new TypeFragment();
+        beautiful.setFirstType(3);
+        nl_goods_info.setViewPager(this, titles, vp_goods_info, R.color.Gray, R.color.AppColor, 16, 16, 0, 0, true);
+        nl_goods_info.setBgLine(this, 1, R.color.line);
+        nl_goods_info.setNavLine(this, 2, R.color.AppColor, 0);
+        goodsInfoFragmentList =  new ArrayList<TypeFragment>();
+        goodsInfoFragmentList.add(wash);
+        goodsInfoFragmentList.add(skincare);
+        goodsInfoFragmentList.add(beautiful);
+        pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), goodsInfoFragmentList);
+        vp_goods_info.setAdapter(pagerAdapter);
+        vp_goods_info.setCurrentItem(type);
+    }
 
     private void initView() {
-        bu_scan = (Button) findViewById(R.id.bu_Scan);
-        bu_scan.setOnClickListener(this);
-        bu_getGoodsInfo = (Button) findViewById(R.id.bu_getGoodsInfo);
-        bu_getGoodsInfo.setOnClickListener(this);
-        submit_goods_info = (TextView) findViewById(R.id.submit_goods_info);
-        submit_goods_info.setOnClickListener(this);
-
-        et_barcode = (EditText) findViewById(R.id.et_barcode);
-        et_goodsName = (EditText) findViewById(R.id.et_goodsName);
-        et_nowPriceAll = (EditText) findViewById(R.id.et_nowPriceAll);
-        et_goods_stock_num = (EditText) findViewById(R.id.et_goods_stock_num);
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (data != null) {
-            Bundle bundle = data.getExtras();
-            theresult = bundle.getString("SCAN_RESULT");
-            System.out.println("==============" + theresult);
-            et_barcode.setText(theresult);
-
-            goods_info = goodsInfoController.getGoodsInfoByDB(theresult);
-            if (goods_info.getGoodsName()==null) {
-                et_goodsName.setHint("未添加数据");
-                et_goods_stock_num.setHint("0");
-            } else {
-                et_goodsName.setText(goods_info.getGoodsName());
-                et_nowPriceAll.setText(String.valueOf(goods_info.getNowPrice()));
-                et_goods_stock_num.setText(String.valueOf(goods_info.getNewStockNum()));
-            }
-            System.out.println("===========" + goods_info);
-        }
+        nl_goods_info = (NavitationLayout) findViewById(R.id.nl_goods_info);
+        vp_goods_info = (ViewPager) findViewById(R.id.vp_goods_info);
+        iv_close_goods_info = (ImageView) findViewById(R.id.iv_close_goods_info);
+        iv_add = (ImageView) findViewById(R.id.iv_add);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.bu_Scan:
-                new IntentIntegrator(this).initiateScan();
+        switch (v.getId()){
+            case R.id.iv_close_goods_info:
+                finish();
                 break;
-            case R.id.bu_getGoodsInfo:
-                goodsInfoController.queryGoodsInfoName(theresult);
-                break;
-            case R.id.submit_goods_info:
-                String etGoodsName = et_goodsName.getText().toString();
-                // 现在售价
-                double etNowAllPrice = Double.valueOf(et_nowPriceAll.getText().toString());
-                // 库存数量
-                Integer goodsStockNum =  et_goods_stock_num.getText().toString().equals("")?0:Integer.valueOf(et_goods_stock_num.getText().toString());
-
-                goods_info.setNowPrice(etNowAllPrice);
-                goods_info.setGoodsName(etGoodsName);
-                goods_info.setNewStockNum(goodsStockNum);
-                goodsInfoController.save(goods_info);
-
-                Toast.makeText(this, "信息入库完毕！", Toast.LENGTH_SHORT).show();
-                clean();
+            case R.id.iv_add:
+                Intent intent = new Intent(this, AddGoodInfoActivity.class);
+                startActivity(intent);
                 break;
         }
-    }
-
-    /**
-     * 网络数据请求回调
-     *
-     * @param goods 商品编码
-     */
-    @Subscribe
-    public void queryResult(Goods goods) {
-        String s = goods.toString();
-        System.out.println("==========" + s);
-        et_goodsName.setText(goods.getGoodsName());
-    }
-
-    /**
-     *  入库完数据清理
-     */
-    private void clean(){
-        goods_info = null;
-        et_goods_stock_num.setText("");
-        et_nowPriceAll.setText("");
-        et_barcode.setText("");
-        et_goodsName.setText("");
     }
 }

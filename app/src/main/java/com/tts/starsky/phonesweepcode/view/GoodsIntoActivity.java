@@ -106,7 +106,7 @@ public class GoodsIntoActivity extends Activity implements View.OnClickListener,
      */
     @Override
     public void onClick(DialogInterface dialog, int which) {
-        Intent intent = new Intent(GoodsIntoActivity.this, GoodsInfoActivity.class);
+        Intent intent = new Intent(GoodsIntoActivity.this, AddGoodInfoActivity.class);
         String jsonString = JSON.toJSONString(goods_info);
         intent.putExtra("goodsInfo", jsonString);
         startActivity(intent);
