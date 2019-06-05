@@ -13,14 +13,9 @@ import com.tts.starsky.phonesweepcode.R;
 import com.tts.starsky.phonesweepcode.bean.DownEvenBusSign;
 import com.tts.starsky.phonesweepcode.controller.FunctionController;
 import com.tts.starsky.phonesweepcode.db.BackUp;
-import com.tts.starsky.phonesweepcode.oss.UpFile;
 import com.tts.starsky.phonesweepcode.utile.GlideImageLoader;
 import com.tts.starsky.phonesweepcode.utile.OkHttpUtil;
-import com.tts.starsky.phonesweepcode.view.AccountsActivity;
-import com.tts.starsky.phonesweepcode.view.GoodsInfoActivity;
-import com.tts.starsky.phonesweepcode.view.GoodsIntoActivity;
 import com.white.progressview.CircleProgressView;
-import com.white.progressview.HorizontalProgressView;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 

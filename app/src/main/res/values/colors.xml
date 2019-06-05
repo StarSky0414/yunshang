@@ -8,4 +8,9 @@
     <color name="swipeoption_blue">#3693D0</color>
     <color name="swipeoption_purple">#ff1744</color>
     <color name="colorFocused">#912a3e</color>
+    <color name="AppBackground">#EDEDED</color>
+    <color name="Gray">#6b6b6b</color>
+    <color name="AppColor">#89FF0000</color>
+    <color name="line">#bebebe</color>
+    <color name="White">#ffffff</color>
 </resources>
