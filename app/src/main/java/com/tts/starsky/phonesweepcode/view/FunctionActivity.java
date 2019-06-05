@@ -55,7 +55,6 @@ public class FunctionActivity extends Activity implements View.OnClickListener {
 //            return;
 //        }
 
-
         EventBus.getDefault().register(this);
         functionController = new FunctionController(this);
         setContentView(R.layout.activity_function);
