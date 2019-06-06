@@ -10,19 +10,20 @@ import android.widget.TextView;
 import com.tts.starsky.phonesweepcode.R;
 import com.tts.starsky.phonesweepcode.bean.TypeConcreteInfo;
 import com.tts.starsky.phonesweepcode.bean.TypeGeneralizeInfo;
+import com.tts.starsky.phonesweepcode.db.bean.GoodsTypeInfo;
 
 import java.util.List;
 
 public class TypeNameAdapter extends BaseAdapter {
 
     private Context context;
-    private List<TypeGeneralizeInfo> typeGeneralizeInfoList;
+    private List<GoodsTypeInfo> typeGeneralizeInfoList;
     private View lastTagView;
     private RecyclerView rv_type_content;
     private List<TypeConcreteInfo> concreteTypeList;
     private TypeContentAdapter adapter;
 
-    public TypeNameAdapter(Context context, List<TypeGeneralizeInfo> typeGeneralizeInfoList, RecyclerView rv_type_content) {
+    public TypeNameAdapter(Context context, List<GoodsTypeInfo> typeGeneralizeInfoList, RecyclerView rv_type_content) {
         this.context = context;
         this.typeGeneralizeInfoList = typeGeneralizeInfoList;
         this.rv_type_content = rv_type_content;
@@ -55,7 +56,7 @@ public class TypeNameAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.tv_type_name.setText(typeGeneralizeInfoList.get(position).getType_generalize_name());
+        viewHolder.tv_type_name.setText(typeGeneralizeInfoList.get(position).getType_concrete_name());
         return convertView;
     }
 

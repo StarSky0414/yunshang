@@ -24,7 +24,7 @@ public class SalesControllerTest extends DBInitTest {
 
     @Test
     public void makeSales() {
-        GoodsInfo goodsInfo = new GoodsInfo("xxxx123", "xxxx123", "xxxx123", 0, 0);
+        GoodsInfo goodsInfo = new GoodsInfo("xxxx123", "xxxx123", "xxxx123", 0, 0,0);
         ArrayList<GoodsInfo> goodsInfos = new ArrayList<>();
         goodsInfos.add(goodsInfo);
         goodsInfos.add(goodsInfo);

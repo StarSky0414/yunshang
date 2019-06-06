@@ -11,6 +11,7 @@ import org.greenrobot.greendao.annotation.Generated;
  * 商品名称
  * 当前售价
  * 当前库存
+ * 类型id
  */
 @Entity
 public class GoodsInfo {
@@ -21,14 +22,16 @@ public class GoodsInfo {
     private String goodsName;
     private double nowPrice=0;
     private int newStockNum=0;
-    @Generated(hash = 607047788)
+    private long typeId=0;
+    @Generated(hash = 160428439)
     public GoodsInfo(String goodsId, String goodsBarCode, String goodsName,
-            double nowPrice, int newStockNum) {
+            double nowPrice, int newStockNum, long typeId) {
         this.goodsId = goodsId;
         this.goodsBarCode = goodsBarCode;
         this.goodsName = goodsName;
         this.nowPrice = nowPrice;
         this.newStockNum = newStockNum;
+        this.typeId = typeId;
     }
     @Generated(hash = 1227172248)
     public GoodsInfo() {
@@ -62,6 +65,12 @@ public class GoodsInfo {
     }
     public void setNewStockNum(int newStockNum) {
         this.newStockNum = newStockNum;
+    }
+    public long getTypeId() {
+        return this.typeId;
+    }
+    public void setTypeId(long typeId) {
+        this.typeId = typeId;
     }
 
 }

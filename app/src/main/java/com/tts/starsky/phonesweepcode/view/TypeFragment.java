@@ -22,6 +22,7 @@ import com.tts.starsky.phonesweepcode.adapter.TypeNameAdapter;
 import com.tts.starsky.phonesweepcode.bean.TypeConcreteInfo;
 import com.tts.starsky.phonesweepcode.bean.TypeGeneralizeInfo;
 import com.tts.starsky.phonesweepcode.controller.TypeContraller;
+import com.tts.starsky.phonesweepcode.db.bean.GoodsTypeInfo;
 import com.tts.starsky.phonesweepcode.utile.OnItemClickListener;
 
 import org.jetbrains.annotations.Nullable;
@@ -34,8 +35,8 @@ public class TypeFragment extends Fragment implements AdapterView.OnItemClickLis
     private ListView lv_type_name;
     private RecyclerView rv_type_content;
     private TypeContraller typeContraller;
-    private List<TypeGeneralizeInfo> generalizeTypeList;
-    private List<TypeConcreteInfo> concreteTypeList;
+    private List<GoodsTypeInfo> generalizeTypeList;
+    private List<GoodsTypeInfo> concreteTypeList;
     private RelativeLayout rl_search;
     private ImageView iv_search;
     private TextView tv_search;
@@ -65,7 +66,7 @@ public class TypeFragment extends Fragment implements AdapterView.OnItemClickLis
         generalizeTypeList = typeContraller.getGeneralizeTypeList(firstType);
         TypeNameAdapter typeNameAdapter = new TypeNameAdapter(getActivity(), generalizeTypeList, rv_type_content);
         lv_type_name.setAdapter(typeNameAdapter);
-        concreteTypeList = typeContraller.getConcreteTypeList(generalizeTypeList.get(0).getType_generalize_id());
+        concreteTypeList = typeContraller.getConcreteTypeList(generalizeTypeList.get(0).getType_concrete_id());
         TypeContentAdapter typeContentAdapter = new TypeContentAdapter(getActivity(), concreteTypeList);
         rv_type_content.setAdapter(typeContentAdapter);
         typeContentAdapter.setOnItemClickListener(this);
@@ -83,7 +84,7 @@ public class TypeFragment extends Fragment implements AdapterView.OnItemClickLis
     @SuppressLint("ResourceAsColor")
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        concreteTypeList = typeContraller.getConcreteTypeList(generalizeTypeList.get(position).getType_generalize_id());
+        concreteTypeList = typeContraller.getConcreteTypeList(generalizeTypeList.get(position).getType_concrete_id());
         TypeContentAdapter typeContentAdapter = new TypeContentAdapter(getActivity(), concreteTypeList);
         rv_type_content.setAdapter(typeContentAdapter);
         typeContentAdapter.setOnItemClickListener(this);
@@ -92,7 +93,7 @@ public class TypeFragment extends Fragment implements AdapterView.OnItemClickLis
     @Override
     public void onItemClick(View view, int position) {
         Intent intent = new Intent(getActivity(), ContentActivity.class);
-        intent.putExtra("type",concreteTypeList.get(position));
+        intent.putExtra("type",concreteTypeList.get(position).getType_concrete_id());
         getActivity().startActivity(intent);
     }
 

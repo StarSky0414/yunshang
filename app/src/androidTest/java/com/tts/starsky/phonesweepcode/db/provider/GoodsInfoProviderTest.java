@@ -12,9 +12,9 @@ public class GoodsInfoProviderTest extends DBInitTest{
 
     @Test
     public void testGoodsInfoInsert() {
-        GoodsInfo goodsInfo = new GoodsInfo("6924743915770", "6924743915770", "薯片", 20, 20);
+        GoodsInfo goodsInfo = new GoodsInfo("6924743915770", "6924743915770", "薯片", 20, 20,0);
         goodsInfoProvider.goodsInfoInsert(goodsInfo);
-        goodsInfo = new GoodsInfo("6922507096369", "6922507096369", "冰红茶", 10, 20);
+        goodsInfo = new GoodsInfo("6922507096369", "6922507096369", "冰红茶", 10, 20,0);
         goodsInfoProvider.goodsInfoInsert(goodsInfo);
     }
 }

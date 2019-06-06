@@ -65,7 +65,7 @@ public class BillActivity extends Activity {
                 } else  {
                     Toast.makeText(BillActivity.this, "松开", Toast.LENGTH_SHORT).show();
                     tv_profit.setText("*******");
-//松开todo 处理相关逻辑
+//松开 处理相关逻辑
                 }
                 return true;
             }

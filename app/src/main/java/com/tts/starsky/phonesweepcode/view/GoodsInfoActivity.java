@@ -12,6 +12,9 @@ import android.widget.ImageView;
 
 import com.tts.starsky.phonesweepcode.R;
 import com.tts.starsky.phonesweepcode.adapter.ViewPagerAdapter;
+import com.tts.starsky.phonesweepcode.controller.GoodsInfoController;
+import com.tts.starsky.phonesweepcode.db.bean.GoodsTypeInfo;
+import com.tts.starsky.phonesweepcode.db.provider.GoodsTypeInfoProvider;
 import com.tts.starsky.phonesweepcode.utile.NavitationLayout;
 
 import java.util.ArrayList;
@@ -26,10 +29,12 @@ public class GoodsInfoActivity extends AppCompatActivity implements View.OnClick
     private ImageView iv_close_goods_info;
     private int type;
     private ImageView iv_add;
+    private GoodsTypeInfoProvider goodsTypeInfoProvider;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        goodsTypeInfoProvider = new GoodsTypeInfoProvider();
         setContentView(R.layout.activity_goods_info);
         initView();
         initData();
@@ -44,20 +49,20 @@ public class GoodsInfoActivity extends AppCompatActivity implements View.OnClick
     private void initData() {
         Intent intent = getIntent();
         type = intent.getIntExtra("type", 0);
-        String titles[] = new String[]{"洗化","护肤","彩妆"};
-        TypeFragment wash = new TypeFragment();
-        wash.setFirstType(1);
-        TypeFragment skincare = new TypeFragment();
-        skincare.setFirstType(2);
-        TypeFragment beautiful = new TypeFragment();
-        beautiful.setFirstType(3);
-        nl_goods_info.setViewPager(this, titles, vp_goods_info, R.color.Gray, R.color.AppColor, 16, 16, 0, 0, true);
+
+        List<GoodsTypeInfo> goodsTypeInfos = goodsTypeInfoProvider.queryGoodsTypeListRoot();
+        goodsInfoFragmentList =  new ArrayList<TypeFragment>();
+        String[] strings = new String[goodsTypeInfos.size()];
+
+        for (int i=0;i<goodsTypeInfos.size();i++){
+            TypeFragment typeFragment = new TypeFragment();
+            typeFragment.setFirstType(i+1);
+            goodsInfoFragmentList.add(typeFragment);
+            strings[i]= goodsTypeInfos.get(i).getType_concrete_name();
+        }
+        nl_goods_info.setViewPager(this,strings, vp_goods_info, R.color.Gray, R.color.AppColor, 16, 16, 0, 0, true);
         nl_goods_info.setBgLine(this, 1, R.color.line);
         nl_goods_info.setNavLine(this, 2, R.color.AppColor, 0);
-        goodsInfoFragmentList =  new ArrayList<TypeFragment>();
-        goodsInfoFragmentList.add(wash);
-        goodsInfoFragmentList.add(skincare);
-        goodsInfoFragmentList.add(beautiful);
         pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), goodsInfoFragmentList);
         vp_goods_info.setAdapter(pagerAdapter);
         vp_goods_info.setCurrentItem(type);

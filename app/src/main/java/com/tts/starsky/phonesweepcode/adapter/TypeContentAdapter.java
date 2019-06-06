@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.tts.starsky.phonesweepcode.R;
 import com.tts.starsky.phonesweepcode.bean.TypeConcreteInfo;
+import com.tts.starsky.phonesweepcode.db.bean.GoodsTypeInfo;
 import com.tts.starsky.phonesweepcode.utile.OnItemClickListener;
 
 import java.io.File;
@@ -21,10 +22,10 @@ import java.util.List;
 public class TypeContentAdapter extends RecyclerView.Adapter {
 
     private Context context;
-    private List<TypeConcreteInfo> typeConcreteInfoList;
+    private List<GoodsTypeInfo> typeConcreteInfoList;
     private OnItemClickListener onItemClickListener;
 
-    public TypeContentAdapter(Context context, List<TypeConcreteInfo> typeConcreteInfoList) {
+    public TypeContentAdapter(Context context, List<GoodsTypeInfo> typeConcreteInfoList) {
         this.context = context;
         this.typeConcreteInfoList = typeConcreteInfoList;
     }
