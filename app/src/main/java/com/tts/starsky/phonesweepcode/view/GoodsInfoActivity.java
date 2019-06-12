@@ -82,8 +82,7 @@ public class GoodsInfoActivity extends AppCompatActivity implements View.OnClick
                 finish();
                 break;
             case R.id.iv_add:
-                Intent intent = new Intent(this, AddGoodInfoActivity.class);
-                startActivity(intent);
+
                 break;
         }
     }

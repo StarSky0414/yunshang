@@ -80,8 +80,7 @@ public class ContentActivity extends Activity implements View.OnClickListener, O
 
     @Override
     public void onItemClick(View view, int position) {
-        Intent commodityDetails = new Intent(this, AddGoodInfoActivity.class);
-        startActivity(commodityDetails);
+
     }
 
     @Override

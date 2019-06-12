@@ -33,7 +33,6 @@
         <activity android:name=".view.GoodsInfoActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
         <activity android:name=".view.GoodsIntoActivity"/>
-        <activity android:name=".view.AddGoodInfoActivity"/>
         <activity android:name=".view.DiscountActivity"/>
         <activity android:name=".view.ContentActivity"/>
 
