@@ -93,7 +93,7 @@ public class TypeFragment extends Fragment implements AdapterView.OnItemClickLis
     @Override
     public void onItemClick(View view, int position) {
         Intent intent = new Intent(getActivity(), ContentActivity.class);
-        intent.putExtra("type",concreteTypeList.get(position).getType_concrete_id());
+        intent.putExtra("type",concreteTypeList.get(position));
         getActivity().startActivity(intent);
     }
 

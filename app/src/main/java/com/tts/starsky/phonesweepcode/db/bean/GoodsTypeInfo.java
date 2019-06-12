@@ -4,8 +4,10 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 
+import java.io.Serializable;
+
 @Entity
-public class GoodsTypeInfo {
+public class GoodsTypeInfo implements Serializable {
 
     // 当前分类id
     @Id(autoincrement = true)
