@@ -118,13 +118,13 @@ public class AddGoodInfoActivity extends Activity implements View.OnClickListene
      * 网络数据请求回调
      *
      * @param goods 商品编码
-     */
+     *//*
     @Subscribe
     public void queryResult(Goods goods) {
         String s = goods.toString();
         System.out.println("==========" + s);
         et_goodsName.setText(goods.getGoodsName());
-    }
+    }*/
 
     /**
      *  入库完数据清理

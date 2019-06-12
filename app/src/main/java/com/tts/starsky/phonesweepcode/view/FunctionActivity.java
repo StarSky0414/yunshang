@@ -39,7 +39,6 @@ public class FunctionActivity extends Activity implements View.OnClickListener {
     private FunctionController functionController;
     private String mSDCardPath;
     private String url;
-    private Banner bn_banner;
 
 
     @Override
@@ -83,13 +82,6 @@ public class FunctionActivity extends Activity implements View.OnClickListener {
         update_main.setOnClickListener(this);
 
         circleProgressView = (CircleProgressView) findViewById(R.id.circle_progress_normal);
-
-        bn_banner = (Banner) findViewById(R.id.bn_banner);
-        bn_banner.setImageLoader(new GlideImageLoader());
-        bn_banner.isAutoPlay(true);
-        bn_banner.setDelayTime(5000);
-        bn_banner.setIndicatorGravity(BannerConfig.CENTER);
-        bn_banner.setImages(new ArrayList<String>());
     }
 
     @Override

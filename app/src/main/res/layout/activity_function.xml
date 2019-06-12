@@ -1,48 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#d7d7d7"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/rl_top"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:orientation="horizontal">
-
-        <com.youth.banner.Banner
-            android:id="@+id/bn_banner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </RelativeLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="3">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="3">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:weightSum="2">
 
             <RelativeLayout
                 android:id="@+id/rl_goods_info_main"
-                android:layout_width="126dp"
-                android:layout_height="126dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:background="#fff">
+                android:layout_marginRight="1dp"
+                android:background="#fff"
+                android:gravity="center">
 
                 <ImageView
                     android:id="@+id/iv_goods_info_main"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:background="@mipmap/goods_info_main"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:background="@mipmap/goods_info_main" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -57,10 +47,10 @@
 
             <RelativeLayout
                 android:id="@+id/rl_goods_into_main"
-                android:layout_width="126dp"
-                android:layout_height="126dp"
-                android:layout_marginLeft="3dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:layout_marginLeft="1dp"
                 android:background="#fff"
                 android:gravity="center">
 
@@ -68,8 +58,8 @@
                     android:id="@+id/iv_goods_into_main"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
-                    android:background="@mipmap/goods_into_main"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:background="@mipmap/goods_into_main" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -83,22 +73,32 @@
 
             </RelativeLayout>
 
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:weightSum="2">
             <RelativeLayout
                 android:id="@+id/rl_balance_main"
-                android:layout_width="126dp"
-                android:layout_height="126dp"
-                android:layout_marginLeft="3dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="1dp"
                 android:layout_weight="1"
                 android:background="#fff"
                 android:gravity="center">
 
                 <ImageView
 
-                    android:background="@mipmap/balance_main"
                     android:id="@+id/iv_balance_main"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:background="@mipmap/balance_main" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -110,43 +110,36 @@
                     android:textColor="#1b1b1b" />
 
             </RelativeLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:weightSum="3">
 
             <RelativeLayout
                 android:id="@+id/update_main"
-                android:layout_width="126dp"
-                android:layout_height="126dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:layout_marginLeft="1dp"
                 android:background="#fff"
                 android:gravity="center">
 
                 <ImageView
-                    android:background="@mipmap/updata_main"
                     android:id="@+id/iv_version"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:background="@mipmap/updata_main" />
 
                 <com.white.progressview.CircleProgressView
-                    android:visibility="gone"
-                    android:layout_centerHorizontal="true"
                     android:id="@+id/circle_progress_normal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
                     android:layout_weight="1"
                     android:padding="5dp"
                     android:progress="0"
+                    android:visibility="gone"
                     app:progressNormalSize="4dp"
                     app:progressReachSize="4dp"
                     app:progressStyle="Normal"
-                    app:radius="30dp"
-                    />
+                    app:radius="30dp" />
 
                 <TextView
                     android:id="@+id/tv_update_text"
@@ -160,22 +153,31 @@
 
             </RelativeLayout>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:weightSum="2">
+
             <RelativeLayout
                 android:id="@+id/rl_discount_main"
-                android:layout_width="126dp"
-                android:layout_height="126dp"
-                android:layout_marginLeft="3dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="1dp"
                 android:layout_weight="1"
                 android:background="#fff"
                 android:clickable="true"
                 android:gravity="center">
 
                 <ImageView
-                    android:background="@mipmap/discount_main"
                     android:id="@+id/iv_development"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_centerHorizontal="true"
+                    android:background="@mipmap/discount_main"
                     android:focusable="false" />
 
                 <TextView
@@ -192,19 +194,19 @@
 
             <RelativeLayout
                 android:id="@+id/rl_about_me_main"
-                android:layout_width="126dp"
-                android:layout_height="126dp"
-                android:layout_marginLeft="3dp"
-                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="#fff">
+                android:layout_marginLeft="1dp"
+                android:background="#fff"
+                android:gravity="center">
 
                 <ImageView
-                    android:background="@mipmap/trend_main"
                     android:id="@+id/iv_about_me_main"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_centerHorizontal="true" />
+                    android:layout_centerHorizontal="true"
+                    android:background="@mipmap/trend_main" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -218,4 +220,6 @@
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
+
+
 </LinearLayout>
