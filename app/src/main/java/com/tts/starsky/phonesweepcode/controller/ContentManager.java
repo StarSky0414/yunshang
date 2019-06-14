@@ -15,7 +15,7 @@ public class ContentManager {
         this.context = context;
     }
 
-    public List<GoodsInfo> getGoodsInfoList(int type_concrete_id) {
+    public List<GoodsInfo> getGoodsInfoList(Long type_concrete_id) {
 
         /*DatabaseOP databaseOP = new DatabaseOP(context);
         List<CommodityInfo> commodityInfoList = databaseOP.getGoodsInfoList(type_concrete_id);*/

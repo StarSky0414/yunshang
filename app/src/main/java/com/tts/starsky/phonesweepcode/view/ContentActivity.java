@@ -15,6 +15,7 @@ import com.tts.starsky.phonesweepcode.adapter.RecommendAdapter;
 import com.tts.starsky.phonesweepcode.bean.TypeConcreteInfo;
 import com.tts.starsky.phonesweepcode.controller.ContentManager;
 import com.tts.starsky.phonesweepcode.db.bean.GoodsInfo;
+import com.tts.starsky.phonesweepcode.db.bean.GoodsTypeInfo;
 import com.tts.starsky.phonesweepcode.utile.OnItemClickListener;
 
 import java.util.List;
@@ -24,8 +25,8 @@ public class ContentActivity extends Activity implements View.OnClickListener, O
     private TextView tv_title;
     private ImageView iv_back;
     private RecyclerView rv_content;
-    private TypeConcreteInfo typeConcreteInfo;
-    private int type_concrete_id;
+    private GoodsTypeInfo typeConcreteInfo;
+    private Long type_concrete_id;
     private ContentManager contentManager;
     private List<GoodsInfo> goodsInfoList;
 
@@ -45,7 +46,7 @@ public class ContentActivity extends Activity implements View.OnClickListener, O
 
     private void initData() {
         Intent intent = getIntent();
-        typeConcreteInfo = (TypeConcreteInfo) intent.getSerializableExtra("type");
+        typeConcreteInfo = (GoodsTypeInfo) intent.getSerializableExtra("type");
         if (typeConcreteInfo != null) {
             tv_title.setText(typeConcreteInfo.getType_concrete_name());
             type_concrete_id = typeConcreteInfo.getType_concrete_id();
