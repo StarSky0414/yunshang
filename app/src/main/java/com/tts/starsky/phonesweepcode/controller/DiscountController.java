@@ -16,6 +16,7 @@ public class DiscountController {
         discountProvider = new DiscountProvider();
     }
 
+    // 获取所有折扣信息
     public List<Discount> getAllDiscount(){
         List<Discount> discounts = discountProvider.discountQueryAll();
         return discounts;
@@ -24,11 +25,11 @@ public class DiscountController {
     public void addDiscount(Discount discount) {
         discountProvider.discountInsert(discount);
     }
-
+    // 删除折扣信息
     public void deleDiscount(Long discountId) {
         discountProvider.removeDiscountById(discountId);
     }
-
+    // 修改折扣信息
     public void changeDiscount(Discount discount){
         discountProvider.discountChange(discount);
     }

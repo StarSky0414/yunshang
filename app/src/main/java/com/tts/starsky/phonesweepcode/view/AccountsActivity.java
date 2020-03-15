@@ -131,17 +131,21 @@ public class AccountsActivity extends Activity implements View.OnClickListener {
                 View view = LayoutInflater.from(AccountsActivity.this).inflate(R.layout.dialog_account, null);
                 builder.setView(view);
                 final EditText et_changed_reality_make_collections = (EditText) view.findViewById(R.id.et_changed_reality_make_collections);
-                TextView tv_reality_make_collections = (TextView) view.findViewById(R.id.tv_reality_make_collections);
+                final TextView tv_reality_make_collections = (TextView) view.findViewById(R.id.tv_reality_make_collections);
 
                 String[] split = tv_balance_base.getText().toString().split("= ");
-                String s = split[split.length - 1];
+                final String s = split[split.length - 1];
                 tv_reality_make_collections.setText(s);
 
                 builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
                         String string = et_changed_reality_make_collections.getText().toString();
 
+                        if (string == null || "".equals(string)){
+                            string = tv_reality_make_collections.getText().toString();
+                        }
                         String jsonString = JSON.toJSONString(accountsAdapter.getItemDataList());
                         Intent intent = new Intent(AccountsActivity.this, BillActivity.class);
                         intent.putExtra("dataList", jsonString);
@@ -175,7 +179,12 @@ public class AccountsActivity extends Activity implements View.OnClickListener {
 //            GoodsInfo goodsInfo = new GoodsInfo(theresult, theresult, "冰红茶", 10, 20);
             GoodsInfoProvider goodsInfoProvider = new GoodsInfoProvider();
             GoodsInfo goodsInfo = goodsInfoProvider.goodsQueryByBrCode(theresult);
-            accountsAdapter.addItemList(goodsInfo.getGoodsName(), goodsInfo.getNowPrice(), goodsInfo.getGoodsBarCode(), goodsInfo.getNewStockNum());
+
+            if (goodsInfo == null || goodsInfo.getGoodsBarCode().equals("")){
+                Toast.makeText(this, "商品未添加,请添加商品后进项出售！", Toast.LENGTH_SHORT).show();
+            }else {
+                accountsAdapter.addItemList(goodsInfo.getGoodsName(), goodsInfo.getNowPrice(), goodsInfo.getGoodsBarCode(), goodsInfo.getNewStockNum());
+            }
 
         }
     }

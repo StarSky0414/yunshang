@@ -16,7 +16,7 @@ public class UpFile {
 
         System.out.println("oss     ===========================");
         // 构造上传请求。
-        PutObjectRequest put = new PutObjectRequest("thethreestooges", upPhotoPath, upLoadeFile);
+        PutObjectRequest put = new PutObjectRequest("yuange0414", upPhotoPath, upLoadeFile);
         try {
             do {
                 oss = InitOssClient.ossClient;

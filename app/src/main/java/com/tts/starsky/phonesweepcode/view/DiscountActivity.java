@@ -21,6 +21,9 @@ import com.tts.starsky.phonesweepcode.controller.DiscountController;
 import com.tts.starsky.phonesweepcode.db.bean.Discount;
 import java.util.List;
 
+/**
+ *  折扣视图
+ */
 public class DiscountActivity extends Activity implements RecyclerTouchListener.RecyclerTouchListenerHelper,View.OnClickListener {
 
     private RecyclerView mRecyclerView;
@@ -39,11 +42,12 @@ public class DiscountActivity extends Activity implements RecyclerTouchListener.
 
         initRecyclerView();
 
-
+        // 初始化弹窗信息，用于添加数据
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_discount, null);
         et_discount_name = (EditText) view.findViewById(R.id.et_discount_name);
         et_discount_num = (EditText) view.findViewById(R.id.et_discount_num);
 
+        // 设定添加按钮的监听
         ImageView iv_add_discount = (ImageView) findViewById(R.id.iv_add_discount);
         iv_add_discount.setOnClickListener(this);
     }
@@ -58,7 +62,9 @@ public class DiscountActivity extends Activity implements RecyclerTouchListener.
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        // 滑动监听
         onTouchListener = new RecyclerTouchListener(this, mRecyclerView);
+        // 设定划开的样式以及点击事件
         onTouchListener.setSwipeOptionViews(R.id.edit, R.id.dele)
                 .setSwipeable(R.id.rowFG, R.id.rowBG, new RecyclerTouchListener.OnSwipeOptionsClickListener() {
                     @Override
@@ -82,23 +88,27 @@ public class DiscountActivity extends Activity implements RecyclerTouchListener.
                 });
     }
 
+    // 获取数据信息
     private List<Discount> getData() {
         List<Discount> allDiscount = discountController.getAllDiscount();
         return allDiscount;
     }
 
+    // 添加一条
     @Override
     protected void onResume() {
         super.onResume();
         mRecyclerView.addOnItemTouchListener(onTouchListener);
     }
 
+    // 移除一条
     @Override
     protected void onPause() {
         super.onPause();
         mRecyclerView.removeOnItemTouchListener(onTouchListener);
     }
 
+    //
     @Override
     public void setOnActivityTouchListener(OnActivityTouchListener listener) {
         this.touchListener = listener;

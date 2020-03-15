@@ -52,6 +52,7 @@ public class BillActivity extends Activity {
         tv_reality_price.setText(String.format("%.2f", stopCut));
         tv_profit.setText("*******");
 
+        // 结算的获利计算隐藏，长安进行查看
         tv_profit_text.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -73,6 +74,9 @@ public class BillActivity extends Activity {
         });
     }
 
+    /**
+     *  页面信息初始化
+     */
     private void findView() {
         tv_pipeline_id = (TextView) findViewById(R.id.tv_pipeline_id);
         tv_create_time = (TextView) findViewById(R.id.tv_create_time);

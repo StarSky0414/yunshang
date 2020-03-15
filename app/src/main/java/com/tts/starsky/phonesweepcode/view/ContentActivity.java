@@ -15,7 +15,6 @@ import com.tts.starsky.phonesweepcode.adapter.RecommendAdapter;
 import com.tts.starsky.phonesweepcode.bean.TypeConcreteInfo;
 import com.tts.starsky.phonesweepcode.controller.ContentManager;
 import com.tts.starsky.phonesweepcode.db.bean.GoodsInfo;
-import com.tts.starsky.phonesweepcode.db.bean.GoodsTypeInfo;
 import com.tts.starsky.phonesweepcode.utile.OnItemClickListener;
 
 import java.util.List;
@@ -25,8 +24,8 @@ public class ContentActivity extends Activity implements View.OnClickListener, O
     private TextView tv_title;
     private ImageView iv_back;
     private RecyclerView rv_content;
-    private GoodsTypeInfo typeConcreteInfo;
-    private Long type_concrete_id;
+    private TypeConcreteInfo typeConcreteInfo;
+    private int type_concrete_id;
     private ContentManager contentManager;
     private List<GoodsInfo> goodsInfoList;
 
@@ -44,9 +43,12 @@ public class ContentActivity extends Activity implements View.OnClickListener, O
         iv_back.setOnClickListener(this);
     }
 
+    /**
+     *  初始化信息
+     */
     private void initData() {
         Intent intent = getIntent();
-        typeConcreteInfo = (GoodsTypeInfo) intent.getSerializableExtra("type");
+        typeConcreteInfo = (TypeConcreteInfo) intent.getSerializableExtra("type");
         if (typeConcreteInfo != null) {
             tv_title.setText(typeConcreteInfo.getType_concrete_name());
             type_concrete_id = typeConcreteInfo.getType_concrete_id();
@@ -64,6 +66,9 @@ public class ContentActivity extends Activity implements View.OnClickListener, O
         recommendAdapter.setOnItemClickListener(this);
     }
 
+    /**
+     *  初始化页面信息
+     */
     private void initView() {
         tv_title = (TextView) findViewById(R.id.tv_title);
         iv_back = (ImageView) findViewById(R.id.iv_back);
@@ -81,7 +86,8 @@ public class ContentActivity extends Activity implements View.OnClickListener, O
 
     @Override
     public void onItemClick(View view, int position) {
-
+        Intent commodityDetails = new Intent(this, AddGoodInfoActivity.class);
+        startActivity(commodityDetails);
     }
 
     @Override

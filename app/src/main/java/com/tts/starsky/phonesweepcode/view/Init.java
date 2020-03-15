@@ -1,7 +1,13 @@
 package com.tts.starsky.phonesweepcode.view;
 
+import android.Manifest;
 import android.app.Application;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.widget.Toast;
 
+import com.alibaba.sdk.android.oss.OSSClient;
 import com.tts.starsky.phonesweepcode.db.BackUp;
 import com.tts.starsky.phonesweepcode.db.DBBase;
 import com.tts.starsky.phonesweepcode.db.bean.Discount;
@@ -14,6 +20,8 @@ import com.tts.starsky.phonesweepcode.utile.SharedPreferencesUtil;
 
 import java.util.List;
 
+import static com.tts.starsky.phonesweepcode.oss.InitOssClient.ossClient;
+
 public class Init extends Application {
 
     public static List<Discount> discounts;
@@ -25,7 +33,6 @@ public class Init extends Application {
         OkHttpUtil.initOkHttp();
         discountInfoInit();
         InitOssClient.initOssClient(this,OSSConfig.stsServer, OSSConfig.endPoint);
-
         SharedPreferencesUtil.init(this);
         new BackUp(this).appInitBackUpCheck();
     }
@@ -40,5 +47,6 @@ public class Init extends Application {
         discounts = discountProvider.discountQueryAll();
         discounts.add(0,discount);
     }
+
 
 }

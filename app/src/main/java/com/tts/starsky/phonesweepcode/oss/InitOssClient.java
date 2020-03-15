@@ -18,6 +18,7 @@ import okhttp3.Response;
  * Created by 37444 on 2018/3/23.
  */
 
+
 public class InitOssClient {
     public static OSSClient ossClient;
     public static void initOssClient(final Context context, String tokenAddress, final String endPoint) {
@@ -31,8 +32,10 @@ public class InitOssClient {
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 Gson gson = new Gson();
-                OssBean ossBean = gson.fromJson(response.body().string
-                        (), OssBean.class);
+                String string = response.body().string
+                        ();
+                System.out.println("phonesweepcod  "+string);
+                OssBean ossBean = gson.fromJson(string, OssBean.class);
                 String KEY_ID = ossBean.getCredentials().getAccessKeyId();
                 String TOKEN = ossBean.getCredentials().getSecurityToken();
                 String SECRET_KEY_ID = ossBean.getCredentials().getAccessKeySecret();

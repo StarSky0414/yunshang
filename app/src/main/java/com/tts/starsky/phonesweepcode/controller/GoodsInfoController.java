@@ -10,6 +10,7 @@ import com.tts.starsky.phonesweepcode.http.Goods;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -30,9 +31,11 @@ public class GoodsInfoController implements Callback{
 
     /**
      * 显示所有商品列表
+     * @return
      */
-    public void showAllGoodsInfoList() {
-
+    public List<GoodsInfo> showAllGoodsInfoList() {
+       List<GoodsInfo> goodsInfoList =  goodsInfoProvider.showAllGoodsInfoList();
+        return goodsInfoList;
     }
 
     /**

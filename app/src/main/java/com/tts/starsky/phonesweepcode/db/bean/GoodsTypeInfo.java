@@ -3,15 +3,9 @@ package com.tts.starsky.phonesweepcode.db.bean;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.annotation.Transient;
-
-import java.io.Serializable;
 
 @Entity
-public class GoodsTypeInfo implements Serializable {
-
-    @Transient
-    static final long serialVersionUID = 42L;
+public class GoodsTypeInfo {
 
     // 当前分类id
     @Id(autoincrement = true)

@@ -1,6 +1,7 @@
 package com.tts.starsky.phonesweepcode.db;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import com.tts.starsky.phonesweepcode.db.dao.DaoMaster;
 import com.tts.starsky.phonesweepcode.db.dao.DaoSession;
@@ -26,8 +27,8 @@ public class DBBase {
      */
     public static void dbBaseinit(Context context){
         DBBase.context = context;
-        QueryBuilder.LOG_SQL = true;
-        QueryBuilder.LOG_VALUES = true;
+//        QueryBuilder.LOG_SQL = true;
+//        QueryBuilder.LOG_VALUES = true;
         do {
             dbBase = new DBBase();
         }while (dbBase ==null);
@@ -54,6 +55,9 @@ public class DBBase {
         //获取DevOpenHelper   它继承 SQLiteOpenHelper
         MyOpenHelper myOpenHelper = new MyOpenHelper(context, DBNAME);
         Database db = myOpenHelper.getWritableDb();
+//        SQLiteDatabase writableDatabase = myOpenHelper.getWritableDatabase()
+//        Database db = (Database) writableDatabase;
+
         //获取  数据库session
         DaoSession daoSession = new DaoMaster(db).newSession();
         return daoSession;

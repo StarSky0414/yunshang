@@ -26,7 +26,7 @@ android {
 
 
     greendao {
-        schemaVersion 20//数据库版本号
+        schemaVersion 23//数据库版本号
         daoPackage 'com.tts.starsky.phonesweepcode.db.dao'//设置DaoMaster、DaoSession、Dao包名
         targetGenDir 'src/main/java'//设置DaoMaster、DaoSession、Dao目录
         //targetGenDirTest：设置生成单元测试目录
@@ -60,6 +60,8 @@ dependencies {
     implementation 'org.greenrobot:greendao:3.2.2' // add library
     implementation 'org.greenrobot:greendao-generator:3.2.2'
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.0'
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'ru.alexbykov:nopermission:1.1.2'
 
     implementation 'com.wkp:ExpandView:1.0.4'
 
@@ -74,6 +76,9 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:26.0.1'
 
     implementation 'com.nikhilpanju.recyclerviewenhanced:recyclerviewenhanced:1.1.0'
+
+//    implementation 'net.zetetic:android-database-sqlcipher:3.5.7'
+
 }
 
 

@@ -4,8 +4,6 @@ import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 
-import java.io.Serializable;
-
 
 /**
  * 商品id
@@ -16,7 +14,7 @@ import java.io.Serializable;
  * 类型id
  */
 @Entity
-public class GoodsInfo{
+public class GoodsInfo {
 
     @Id
     private String goodsId;

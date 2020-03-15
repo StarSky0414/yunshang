@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,10 +18,6 @@ import com.tts.starsky.phonesweepcode.controller.GoodsInfoController;
 import com.tts.starsky.phonesweepcode.db.bean.GoodsInfo;
 import com.tts.starsky.phonesweepcode.db.bean.GoodsStock;
 import com.tts.starsky.phonesweepcode.db.provider.GoodsStockProvider;
-import com.tts.starsky.phonesweepcode.http.Goods;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 public class GoodsIntoActivity extends Activity implements View.OnClickListener, DialogInterface.OnClickListener {
 
@@ -36,31 +31,21 @@ public class GoodsIntoActivity extends Activity implements View.OnClickListener,
     private GoodsInfo goods_info;
     private GoodsInfoController goodsInfoController;
     private GoodsStockProvider goodsStockProvider;
-    private ImageView iv_close_good_into;
-    private Button bu_getGoodsInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        EventBus.getDefault().register(this);
         super.onCreate(savedInstanceState);
         goodsInfoController = new GoodsInfoController();
         goodsStockProvider = new GoodsStockProvider();
-        setContentView(R.layout.activity_good_into);
-        initView();
 
-        String goodsInfoString = getIntent().getStringExtra("goodsInfo");
-        if (goodsInfoString !=null && !goodsInfoString.equals("")){
-            GoodsInfo goodsInfo = JSON.parseObject(goodsInfoString, GoodsInfo.class);
-            et_barcode.setText(goodsInfo.getGoodsBarCode());
-        }
+        setContentView(R.layout.activity_main);
+        initView();
     }
 
 
     private void initView() {
         bu_scan = (Button) findViewById(R.id.bu_Scan);
         bu_scan.setOnClickListener(this);
-        bu_getGoodsInfo = (Button) findViewById(R.id.bu_getGoodsInfo);
-        bu_getGoodsInfo.setOnClickListener(this);
         submit_goods_info = (TextView) findViewById(R.id.submit_goods_info);
         submit_goods_info.setOnClickListener(this);
 
@@ -68,8 +53,7 @@ public class GoodsIntoActivity extends Activity implements View.OnClickListener,
         et_goodsName = (EditText) findViewById(R.id.et_goodsName);
         et_intoPriceAll = (EditText) findViewById(R.id.et_intoPriceAll);
         et_intoGoodsNum = (EditText) findViewById(R.id.et_intoGoodsNum);
-        iv_close_good_into = (ImageView) findViewById(R.id.iv_close_good_into);
-        iv_close_good_into.setOnClickListener(this);
+
     }
 
     @Override
@@ -79,7 +63,19 @@ public class GoodsIntoActivity extends Activity implements View.OnClickListener,
             Bundle bundle = data.getExtras();
             theresult = bundle.getString("SCAN_RESULT");
             System.out.println("==============" + theresult);
-            et_barcode.setText(theresult);
+            goods_info = goodsInfoController.getGoodsInfoByDB(theresult);
+            if (goods_info.getGoodsName() == null) {
+                new AlertDialog.Builder(this)
+                        .setTitle("无商品信息")
+                        .setMessage("未进行商品录入，是否进行商品信息录入！")
+                        .setPositiveButton("是", this)
+                        .setNegativeButton("否", null)
+                        .show();
+            } else {
+                et_barcode.setText(theresult);
+                et_goodsName.setText(goods_info.getGoodsName());
+            }
+
         }
     }
 
@@ -110,7 +106,11 @@ public class GoodsIntoActivity extends Activity implements View.OnClickListener,
      */
     @Override
     public void onClick(DialogInterface dialog, int which) {
-
+        Intent intent = new Intent(GoodsIntoActivity.this, AddGoodInfoActivity.class);
+        String jsonString = JSON.toJSONString(goods_info);
+        intent.putExtra("goodsInfo", jsonString);
+        startActivity(intent);
+        finish();
     }
 
     /**
@@ -135,12 +135,6 @@ public class GoodsIntoActivity extends Activity implements View.OnClickListener,
                 et_barcode.setText("");
                 et_goodsName.setText("");
                 break;
-            case R.id.iv_close_good_into:
-                finish();
-                break;
-            case R.id.bu_getGoodsInfo:
-                goodsInfoController.queryGoodsInfoName(theresult);
-                break;
         }
     }
 
@@ -149,18 +143,6 @@ public class GoodsIntoActivity extends Activity implements View.OnClickListener,
             return false;
         }
         return true;
-    }
-
-    /**
-     * 网络数据请求回调
-     *
-     * @param goods 商品编码
-     */
-    @Subscribe
-    public void queryResult(Goods goods) {
-        String s = goods.toString();
-        System.out.println("==========" + s);
-        et_goodsName.setText(goods.getGoodsName());
     }
 
 }

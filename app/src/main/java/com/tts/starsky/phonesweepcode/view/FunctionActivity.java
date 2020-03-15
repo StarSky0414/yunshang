@@ -39,6 +39,7 @@ public class FunctionActivity extends Activity implements View.OnClickListener {
     private FunctionController functionController;
     private String mSDCardPath;
     private String url;
+    private Banner bn_banner;
 
 
     @Override
@@ -82,16 +83,23 @@ public class FunctionActivity extends Activity implements View.OnClickListener {
         update_main.setOnClickListener(this);
 
         circleProgressView = (CircleProgressView) findViewById(R.id.circle_progress_normal);
+
+        bn_banner = (Banner) findViewById(R.id.bn_banner);
+        bn_banner.setImageLoader(new GlideImageLoader());
+        bn_banner.isAutoPlay(true);
+        bn_banner.setDelayTime(5000);
+        bn_banner.setIndicatorGravity(BannerConfig.CENTER);
+        bn_banner.setImages(new ArrayList<String>());
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_goods_info_main:
-                startActivity(new Intent(this, GoodsInfoActivity.class));
+                startActivity(new Intent(this, GoodsInfoActivityList.class));
                 break;
             case R.id.rl_goods_into_main:
-                startActivity(new Intent(this, GoodsIntoActivity.class));
+                startActivity(new Intent(this, AddGoodInfoActivity.class));
                 break;
             case R.id.rl_balance_main:
                 startActivity(new Intent(this, AccountsActivity.class));
@@ -110,8 +118,9 @@ public class FunctionActivity extends Activity implements View.OnClickListener {
                 break;
 
             case R.id.rl_about_me_main:
-                new BackUp(this).updateTest();
-                Toast.makeText(this, "上传测试文件完成", Toast.LENGTH_SHORT).show();
+//                new BackUp(this).updateTest();
+//                Toast.makeText(this, "上传测试文件完成", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(this, SignActivity.class));
                 break;
         }
     }

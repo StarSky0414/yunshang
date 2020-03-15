@@ -29,6 +29,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+/**
+ *  商品详情的页面
+ *  暂未使用
+ */
 public class TypeFragment extends Fragment implements AdapterView.OnItemClickListener,OnItemClickListener,View.OnClickListener {
 
     private View fragment_type;
@@ -93,7 +97,7 @@ public class TypeFragment extends Fragment implements AdapterView.OnItemClickLis
     @Override
     public void onItemClick(View view, int position) {
         Intent intent = new Intent(getActivity(), ContentActivity.class);
-        intent.putExtra("type",concreteTypeList.get(position));
+        intent.putExtra("type",concreteTypeList.get(position).getType_concrete_id());
         getActivity().startActivity(intent);
     }
 

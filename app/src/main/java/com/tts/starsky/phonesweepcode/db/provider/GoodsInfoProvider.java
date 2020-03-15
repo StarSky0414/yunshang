@@ -3,6 +3,8 @@ package com.tts.starsky.phonesweepcode.db.provider;
 import com.tts.starsky.phonesweepcode.db.bean.GoodsInfo;
 import com.tts.starsky.phonesweepcode.db.dao.GoodsInfoDao;
 
+import java.util.List;
+
 /**
  *  DB 商品信息提供者
  */
@@ -37,5 +39,26 @@ public class GoodsInfoProvider extends DBProviderBase {
         int newStockNum = goodsInfo.getNewStockNum();
         goodsInfo.setNewStockNum(newStockNum - num);
         goodsInfoInsert(goodsInfo);
+    }
+    /**
+     * 显示所有商品列表
+     */
+    public List<GoodsInfo> showAllGoodsInfoList() {
+        List<GoodsInfo> list = dbSession.getGoodsInfoDao().queryBuilder().list();
+        return list;
+    }
+
+    /**
+     * 删除单条商品信息
+     */
+    public void removeGoodsInfoById(String goodsInfoId) {
+        dbSession.getGoodsInfoDao().deleteByKey(goodsInfoId);
+    }
+
+    /**
+     *  修改商品信息
+     */
+    public void goodsInfoChange(GoodsInfo goodsInfo) {
+        dbSession.getGoodsInfoDao().insertOrReplace(goodsInfo);
     }
 }
