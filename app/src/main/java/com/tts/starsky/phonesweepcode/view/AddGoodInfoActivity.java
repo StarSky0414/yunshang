@@ -124,7 +124,7 @@ public class AddGoodInfoActivity extends Activity implements View.OnClickListene
                 break;
                 // 提交商品信息
             case R.id.submit_goods_info:
-                setGoodsStock();
+
                 String etGoodsName = et_goodsName.getText().toString();
                 // 现在售价
                 double etNowAllPrice = Double.valueOf(et_nowPriceAll.getText().toString());
@@ -144,7 +144,10 @@ public class AddGoodInfoActivity extends Activity implements View.OnClickListene
                 goods_info.setGoodsBarCode(etBarcode);
                 goods_info.setGoodsId(etBarcode);
                 // 存储数据库
+
+                System.out.println("================="+goods_info.toString());
                 goodsInfoController.save(goods_info);
+                setGoodsStock();
 
                 Toast.makeText(this, "信息入库完毕！", Toast.LENGTH_SHORT).show();
                 clean();
@@ -166,9 +169,13 @@ public class AddGoodInfoActivity extends Activity implements View.OnClickListene
         GoodsStock goodsStock = new GoodsStock();
         goodsStock.setGoodsId(etBarcodeString);
         goodsStock.setIntoStockNum(etIntoGoodNum);
-        goodsStock.setIntoStockPrice(etInfoAllPrice / etIntoGoodNum);
+        if (etIntoGoodNum != 0 ){
+            goodsStock.setIntoStockPrice(etInfoAllPrice / etIntoGoodNum);
+        }else {
+            goodsStock.setIntoStockPrice(0);
+        }
         goodsStock.setResidueGoodsNum(goodsStock.getIntoStockNum());
-
+        goodsStockProvider = new GoodsStockProvider();
         goodsStockProvider.goodsStockInsert(goods_info, goodsStock);
     }
 

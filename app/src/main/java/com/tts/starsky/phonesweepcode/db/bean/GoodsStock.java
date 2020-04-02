@@ -66,4 +66,14 @@ public class GoodsStock {
         this.residueGoodsNum = residueGoodsNum;
     }
 
+    @Override
+    public String toString() {
+        return "GoodsStock{" +
+                "stockId=" + stockId +
+                ", goodsId='" + goodsId + '\'' +
+                ", intoStockPrice=" + intoStockPrice +
+                ", intoStockNum=" + intoStockNum +
+                ", residueGoodsNum=" + residueGoodsNum +
+                '}';
+    }
 }

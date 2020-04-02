@@ -73,4 +73,15 @@ public class GoodsInfo {
         this.typeId = typeId;
     }
 
+    @Override
+    public String toString() {
+        return "GoodsInfo{" +
+                "goodsId='" + goodsId + '\'' +
+                ", goodsBarCode='" + goodsBarCode + '\'' +
+                ", goodsName='" + goodsName + '\'' +
+                ", nowPrice=" + nowPrice +
+                ", newStockNum=" + newStockNum +
+                ", typeId=" + typeId +
+                '}';
+    }
 }

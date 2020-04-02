@@ -99,7 +99,7 @@ public class FunctionActivity extends Activity implements View.OnClickListener {
                 startActivity(new Intent(this, GoodsInfoActivityList.class));
                 break;
             case R.id.rl_goods_into_main:
-                startActivity(new Intent(this, AddGoodInfoActivity.class));
+                startActivity(new Intent(this, GoodsIntoActivity.class));
                 break;
             case R.id.rl_balance_main:
                 startActivity(new Intent(this, AccountsActivity.class));
