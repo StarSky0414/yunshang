@@ -20,6 +20,9 @@ public class SharedPreferencesUtil {
     private static SharedPreferences.Editor ed;
 
     private static String BACKUP_SQL = "BACKUP_SQL";
+    private static String USER_NAME = "USER_NAME";
+    private static String USER_ID = "USER_ID";
+    private static String IMG = "IMG";
 
 
     private static String getBase(String key) {
@@ -52,5 +55,46 @@ public class SharedPreferencesUtil {
         long currentTimeMillis = System.currentTimeMillis();
         setBase(BACKUP_SQL,String.valueOf(currentTimeMillis));
     }
+
+    /**
+     * 获取用户名字
+     */
+    public String getUserName(){
+        String userName = getBase(USER_NAME);
+        return userName;
+    }
+
+    /**
+     *  设定名字
+     *  条件 【登录成功】
+     */
+    public void setUserName(String userName){
+        setBase(USER_NAME, String.valueOf(userName));
+    }
+
+    /**
+     *  读取用户ID
+     */
+    public String getUserId(){
+        String userId = getBase(USER_ID);
+        return userId;
+    }
+
+    /**
+     *  设定用户Id
+     */
+    public  void setUserId(String userId){
+        setBase(USER_ID, String.valueOf(userId));
+    }
+
+    public static void setImage(String uri){
+        setBase(IMG,uri);
+    }
+
+    public static String getImage(){
+        String base = getBase(IMG);
+        return base;
+    }
+
 
 }

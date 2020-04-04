@@ -3,4 +3,31 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="swipeWidth">85dp</dimen>
+
+
+
+
+    <!--    height尺寸定义    -->
+    <dimen name="height_100">100dp</dimen>
+    <dimen name="height_200">200dp</dimen>
+    <dimen name="height_300">300dp</dimen>
+
+
+
+    <!--    margin尺寸定义    -->
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+
+
+
+
+
+    <!--    text尺寸定义    -->
+    <dimen name="textSize_12">12dp</dimen>
+    <dimen name="textSize_15">15dp</dimen>
+    <dimen name="textSize_20">20dp</dimen>
+    <dimen name="textSize_23">23dp</dimen>
+    <dimen name="textSize_25">25dp</dimen>
+    <dimen name="textSize_30">30dp</dimen>
+
 </resources>

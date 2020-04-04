@@ -1,14 +1,12 @@
 package com.tts.starsky.phonesweepcode.db;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.tts.starsky.phonesweepcode.db.dao.DaoMaster;
 import com.tts.starsky.phonesweepcode.db.dao.DaoSession;
 import com.tts.starsky.phonesweepcode.db.dbUpdate.MyOpenHelper;
 
 import org.greenrobot.greendao.database.Database;
-import org.greenrobot.greendao.query.QueryBuilder;
 
 public class DBBase {
 
