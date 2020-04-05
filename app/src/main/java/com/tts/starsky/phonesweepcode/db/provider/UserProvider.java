@@ -9,7 +9,7 @@ import java.util.List;
  * 用户的数据请求层
  */
 
-public class UserService extends DBProviderBase {
+public class UserProvider extends DBProviderBase {
 
     /**
      *  插入或修改用户信息
@@ -38,7 +38,7 @@ public class UserService extends DBProviderBase {
     }
 
     /**
-     *  根据用户Id查询用户信息
+     *  根据用户userName查询用户信息
      */
     public UserInfo queryUserInfoByName(String userName){
         UserInfo unique = dbSession.getUserInfoDao().queryBuilder().where(UserInfoDao.Properties.UserName.eq(userName)).unique();

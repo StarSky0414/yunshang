@@ -2,7 +2,7 @@ package com.tts.starsky.phonesweepcode.controller;
 
 
 import com.tts.starsky.phonesweepcode.db.bean.UserInfo;
-import com.tts.starsky.phonesweepcode.db.provider.UserService;
+import com.tts.starsky.phonesweepcode.db.provider.UserProvider;
 import com.tts.starsky.phonesweepcode.utile.SharedPreferencesUtil;
 
 /**
@@ -10,12 +10,12 @@ import com.tts.starsky.phonesweepcode.utile.SharedPreferencesUtil;
  */
 public class UserController {
 
-    private final UserService userService;
+    private final UserProvider userProvider;
     private final static String adminName = "admin";
     private final static String adminPwd = "admin";
 
     public UserController() {
-        userService = new UserService();
+        userProvider = new UserProvider();
     }
 
     /**
@@ -24,7 +24,7 @@ public class UserController {
      * 失败返回 false
      */
     public boolean checkUserAccess(String userName, String passWord) {
-        UserInfo userInfo = userService.queryUserInfoByName(userName);
+        UserInfo userInfo = userProvider.queryUserInfoByName(userName);
         if (userInfo == null || !passWord.equals(userInfo.getPassWord())) {
             return false;
         } else {
@@ -68,7 +68,7 @@ public class UserController {
         UserInfo userInfo = new UserInfo();
         userInfo.setUserName(userName);
         userInfo.setPassWord(passWord);
-        userService.insertOrChangeUser(userInfo);
+        userProvider.insertOrChangeUser(userInfo);
         SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil();
         sharedPreferencesUtil.setUserName(userName);
     }
@@ -77,19 +77,19 @@ public class UserController {
      * 修改电话和地址
      */
     public void setUserPhoneAndAdress(String userName, String phone, String address) {
-        UserInfo userInfo = userService.queryUserInfoByName(userName);
+        UserInfo userInfo = userProvider.queryUserInfoByName(userName);
         userInfo.setAddress(address);
         userInfo.setPhone(phone);
-        userService.insertOrChangeUser(userInfo);
+        userProvider.insertOrChangeUser(userInfo);
     }
 
     /**
      * 设定用户头像
      */
     public void setUserPhoto(String userName, String userPhoto) {
-        UserInfo userInfo = userService.queryUserInfoByName(userName);
+        UserInfo userInfo = userProvider.queryUserInfoByName(userName);
         userInfo.setUserPhoto(userPhoto);
-        userService.insertOrChangeUser(userInfo);
+        userProvider.insertOrChangeUser(userInfo);
     }
 
     /**
@@ -97,8 +97,8 @@ public class UserController {
      */
     public static UserInfo getUserInfo(){
         Long userId = getUserId();
-        UserService userService = new UserService();
-        UserInfo userInfo = userService.queryUserInfoById(userId);
+        UserProvider userProvider = new UserProvider();
+        UserInfo userInfo = userProvider.queryUserInfoById(userId);
         return userInfo;
     }
 
