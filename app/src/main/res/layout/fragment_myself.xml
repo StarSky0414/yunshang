@@ -3,10 +3,209 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="5"
-        android:textSize="100dp" />
+        android:orientation="vertical">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@color/trime"
+            android:orientation="horizontal"
+            android:padding="@dimen/textSize_20">
+
+            <TextView
+                android:id="@+id/tv_userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="@dimen/margin_10"
+                android:paddingRight="@dimen/margin_10"
+                android:text="用户小明"
+                android:textColor="@color/gray0"
+                android:textSize="@dimen/textSize_25"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_user_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_userName"
+                android:layout_marginTop="@dimen/margin_10"
+                android:paddingLeft="@dimen/margin_10"
+                android:paddingRight="@dimen/margin_10"
+                android:text="uid:1008009920"
+                android:textColor="@color/gray0" />
+
+            <TextView
+                android:id="@+id/tv_user_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_user_id"
+                android:paddingLeft="@dimen/margin_10"
+                android:paddingRight="@dimen/margin_10"
+                android:text="这是一句介绍我的话"
+                android:textColor="@color/gray0" />
+
+            <ImageView
+                android:id="@+id/iv_userHead"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_userhead" />
+
+        </RelativeLayout>
+
+        <include
+            layout="@layout/item_underline"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_marginRight="@dimen/margin_10" />
+
+        <RelativeLayout
+            android:id="@+id/ll_bill_manager"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:paddingLeft="@dimen/margin_20"
+            android:paddingRight="@dimen/margin_20">
+
+            <ImageView
+                android:id="@+id/iv_bill_manager"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/margin_10"
+                android:src="@drawable/zhekou" />
+
+            <TextView
+                android:id="@+id/tv_bill_manager"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/iv_bill_manager"
+                android:text="折扣管理" />
+
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_goto" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/ll_notice_manager"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:paddingLeft="@dimen/margin_20"
+            android:paddingRight="@dimen/margin_20">
+
+            <ImageView
+                android:id="@+id/iv_notice_manager"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/margin_10"
+                android:src="@drawable/tongzhi" />
+
+            <TextView
+                android:id="@+id/tv_notice_manager"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/iv_notice_manager"
+                android:text="通知管理" />
+
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_goto" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/ll_son_manager"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:paddingLeft="@dimen/margin_20"
+            android:paddingRight="@dimen/margin_20">
+
+            <ImageView
+                android:id="@+id/iv_son_manager"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/margin_10"
+                android:src="@drawable/son" />
+
+            <TextView
+                android:id="@+id/tv_son_manager"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/iv_son_manager"
+                android:text="员工管理" />
+
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_goto" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/ll_set_manager"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:paddingLeft="@dimen/margin_20"
+            android:paddingRight="@dimen/margin_20">
+
+            <ImageView
+                android:id="@+id/iv_set_manager"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/margin_10"
+                android:src="@drawable/set" />
+
+            <TextView
+                android:id="@+id/tv_set_manager"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/iv_set_manager"
+                android:text="设定" />
+
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_goto" />
+        </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

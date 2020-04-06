@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/iv_close_main"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/back_alpha" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="进货管理"
+            android:textColor="#000"
+            android:textSize="16dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_scan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_title"
+        android:background="@drawable/shape_alpha_card"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+        <Button
+            android:id="@+id/bu_Scan"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="@mipmap/scan" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_barcode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_scan"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_alpha_card"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="条形码编号："
+            android:textColor="#fff"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/et_barcode"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:enabled="false"
+            android:background="#0000"
+            android:hint="无需手动输入，可自动获取"
+            android:inputType="number"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:textSize="12dp"  />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_goodsName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_barcode"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_alpha_card"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="商品名称："
+            android:textColor="#fff"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/et_goodsName"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:enabled="false"
+            android:background="#0000"
+            android:hint="无需手动输入，可自动获取"
+            android:inputType="number"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:textSize="12dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_intoPriceAll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_goodsName"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_alpha_card"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="进货总价："
+            android:textColor="#fff"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/et_intoPriceAll"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:inputType="number"
+            android:background="#0000"
+            android:hint="请输入进货总价"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:textSize="12dp"   />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_intoGoodsNum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_intoPriceAll"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_alpha_card"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="进货数量："
+            android:textColor="#fff"
+            android:textSize="12dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/et_intoGoodsNum"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:inputType="number"
+            android:background="#0000"
+            android:hint="请输入进货数量"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:textSize="12dp"  />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/submit_goods_info"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shape_submit"
+        android:gravity="center"
+        android:text="提交"
+        android:textColor="#fff" />
+
+
+</RelativeLayout>
+
+    <!--<Button--><!--android:id="@+id/bu_getGoodsInfo"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:layout_alignParentTop="true"--><!--android:layout_alignParentEnd="true"--><!--android:text="自动获取商品信息" />-->

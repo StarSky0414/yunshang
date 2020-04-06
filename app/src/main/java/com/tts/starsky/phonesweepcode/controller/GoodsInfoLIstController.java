@@ -6,7 +6,7 @@ import com.tts.starsky.phonesweepcode.db.provider.GoodsInfoProvider;
 import java.util.List;
 
 /**
- *  折扣控制层
+ *  商品控制层
  */
 public class GoodsInfoLIstController {
 
@@ -16,7 +16,7 @@ public class GoodsInfoLIstController {
         goodsInfoProvider = new GoodsInfoProvider();
     }
 
-    // 获取所有折扣信息
+    // 获取所有商品信息
     public List<GoodsInfo> getAllGoodsInfo(){
         List<GoodsInfo> goodsInfos = goodsInfoProvider.showAllGoodsInfoList();
         return goodsInfos;
@@ -25,11 +25,11 @@ public class GoodsInfoLIstController {
     public void addGoodsInfo(GoodsInfo goodsInfo) {
         goodsInfoProvider.goodsInfoInsert(goodsInfo);
     }
-    // 删除折扣信息
+    // 删除商品信息
     public void deleGoodsInfo(String goodsInfoId) {
         goodsInfoProvider.removeGoodsInfoById(goodsInfoId);
     }
-    // 修改折扣信息
+    // 修改商品信息
     public void changeGoodsInfo(GoodsInfo goodsInfo){
         goodsInfoProvider.goodsInfoChange(goodsInfo);
     }

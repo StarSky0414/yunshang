@@ -17,4 +17,6 @@ public class PlaceOrderController {
         List<Discount> discounts = discountProvider.discountQueryAll();
         return discounts;
     }
+
+
 }

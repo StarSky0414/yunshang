@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:actionandroid="http://schemas.android.com/apk/distribution"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.tts.starsky.phonesweepcode">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 获取WIFI信息状态的权限 -->
@@ -12,7 +13,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
 
     <application
@@ -20,44 +21,44 @@
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:networkSecurityConfig="@xml/network_security_config"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="n">
 
         <activity android:name=".view.SignActivity">
 
         </activity>
-
-        <activity android:name=".view.LoginActivity">
+        <activity android:name=".view.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.LoginActivity">
+
+        </activity>
         <activity android:name=".view.RegisterActivity">
 
         </activity>
-        <activity android:name=".view.admin.AdminManagerActivity"/>
+        <activity android:name=".view.admin.AdminManagerActivity" />
         <activity android:name=".view.FunctionActivity">
 
         </activity>
-<!--        <activity android:name=".MainActivity"/>-->
         <activity android:name="com.journeyapps.barcodescanner.CaptureActivity" />
-        <activity android:name=".TestActivity"/>
-        <activity android:name=".TraceActivity"/>
-        <activity android:name=".view.AccountsActivity"/>
-        <activity android:name=".view.BillActivity"/>
-        <activity android:name=".view.GoodsInfoActivity"/>
-        <activity android:name=".view.GoodsInfoActivityList"/>
-        <activity android:name=".view.GoodsIntoActivity"/>
-        <activity android:name=".view.AddGoodInfoActivity"/>
-        <activity android:name=".view.DiscountActivity"/>
-        <activity android:name=".view.ContentActivity"/>
-        <activity android:name=".view.activities.MainActivity"/>
+        <activity android:name=".TestActivity" />
+        <activity android:name=".TraceActivity" />
+        <activity android:name=".view.AccountsActivity" />
+        <activity android:name=".view.BillActivity" />
+        <activity android:name=".view.GoodsInfoActivity" />
+        <activity android:name=".view.GoodsInfoActivityList" />
+        <activity android:name=".view.GoodsIntoActivity" />
+        <activity android:name=".view.AddGoodInfoActivity" />
+        <activity android:name=".view.DiscountActivity" />
+        <activity android:name=".view.ContentActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -66,10 +67,9 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
     </application>
-
 
 
 </manifest>
