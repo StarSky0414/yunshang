@@ -33,14 +33,15 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         fragment_myself = inflater.inflate(R.layout.fragment_myself, null);
         initView();
+        initData();
 
         return fragment_myself;
     }
 
 
-    //    private View fragment_myself;
+//    private View fragment_myself;
     private LinearLayout ll_userHead;
-    private RelativeLayout ll_order;
+    private RelativeLayout ll_bill_manager;
     private RelativeLayout ll_add_shop;
     private ImageView iv_order;
     private ImageView iv_add_shop;
@@ -60,16 +61,6 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
     private Uri uri;
 
 
-//    @Override
-//    public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
-//        fragment_myself = inflater.inflate(R.layout.fragment_myself, null);
-//
-//        initView();
-//
-//        initData();
-//        return fragment_myself;
-//    }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -79,17 +70,6 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
     private void initData() {
         UserInfo userInfo = UserController.getUserInfo();
         Glide.with(this).load(userInfo.getUserPhoto()).placeholder(R.drawable.ic_userhead).bitmapTransform(new GlideCircleTransform(getActivity())).into(iv_userHead);
-
-//        List<TrendsInfo> trendsInfos = new TrendsController().queryTrendsInfoById(UserController.getUserId());
-//        TrendsInfoAdapter trendsInfoAdapter = new TrendsInfoAdapter(trendsInfos, getActivity());
-//        LinearLayoutManager manager = new LinearLayoutManager(getActivity()) {
-//            @Override
-//            public boolean canScrollVertically() {
-//                return false;
-//            }
-//        };
-//        manager.setOrientation(LinearLayoutManager.VERTICAL);
-//
 
         tv_userName.setText(userInfo.getUserName());
         tv_user_description.setText("个性签名：" + userInfo.getDescri());
@@ -106,19 +86,6 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         tv_user_id = fragment_myself.findViewById(R.id.tv_user_id);
         tv_user_description = fragment_myself.findViewById(R.id.tv_user_description);
 
-
-//        ll_set = fragment_myself.findViewById(R.id.ll_set);
-//        iv_set = fragment_myself.findViewById(R.id.iv_set);
-//        tv_set = fragment_myself.findViewById(R.id.tv_set);
-//        ll_out = fragment_myself.findViewById(R.id.ll_out);
-//        iv_out = fragment_myself.findViewById(R.id.iv_out);
-//        tv_out = fragment_myself.findViewById(R.id.tv_out);
-//        ll_order = fragment_myself.findViewById(R.id.ll_order);
-//        iv_order = fragment_myself.findViewById(R.id.iv_order);
-//        tv_order = fragment_myself.findViewById(R.id.tv_order);
-//        ll_add_shop = fragment_myself.findViewById(R.id.ll_add_shop);
-//        iv_add_shop = fragment_myself.findViewById(R.id.iv_add_shop);
-//        rv_my_bbs = fragment_myself.findViewById(R.id.rv_my_bbs);
         iv_userHead = fragment_myself.findViewById(R.id.iv_userHead);
         iv_userHead.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -132,20 +99,7 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         });
         iv_userHead.setOnClickListener(this);
 
-        ll_set.setOnClickListener(this);
-//        ll_set.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View v) {
-//                Intent intent = new Intent(getContext(), AddDataActivity.class);
-//                startActivity(intent);
-//                return false;
-//            }
-//        });
-        iv_order.setOnClickListener(this);
-        ll_order.setOnClickListener(this);
-        ll_add_shop.setOnClickListener(this);
-        iv_add_shop.setOnClickListener(this);
-        ll_out.setOnClickListener(this);
+//        ll_out.setOnClickListener(this);
     }
 
     @Override
