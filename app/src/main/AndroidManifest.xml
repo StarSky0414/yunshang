@@ -57,6 +57,7 @@
         <activity android:name=".view.AddGoodInfoActivity"/>
         <activity android:name=".view.DiscountActivity"/>
         <activity android:name=".view.ContentActivity"/>
+        <activity android:name=".view.activities.MainActivity"/>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
