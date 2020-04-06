@@ -13,10 +13,10 @@ public class SonUserInfoController {
     private SonUserProvider sonUserProvider = new SonUserProvider();
 
     // 启用子用户
-    public static final int SON_SIGN_OPEN = 1;
+    public static final String SON_SIGN_OPEN = "1";
 
     // 关闭子用户
-    public static final int SON_SIGN_OFF = 0;
+    public static final String SON_SIGN_OFF = "0";
 
     /**
      * 修改子用户信息状态
@@ -27,15 +27,15 @@ public class SonUserInfoController {
     public long changeSonUserSign(long sonUserId) {
         SonUserInfo sonUserInfo = sonUserProvider.queryOneSonUserInfo(sonUserId);
         String sign = sonUserInfo.getSign();
-        sign = String.valueOf(Integer.parseInt(sign) == SON_SIGN_OFF ? SON_SIGN_OPEN : SON_SIGN_OFF);
+        sign = String.valueOf(Integer.parseInt(sign) == 0 ? 1 : 0);
         sonUserInfo.setSign(sign);
         long update = sonUserProvider.update(sonUserInfo);
         return update;
     }
 
     /**
-     * 创建或更新子用户
-     * @return 为 0 创建失败 ，为1 创建成功
+     * 创建子用户
+     * @return 为 0 创建失败 ，为1 创建成功 
      */
     public long makeOrUpdateSonUser(SonUserInfo sonUserInfo){
         SonUserInfo querySonUserInfo = sonUserProvider.queryOneSonUserInfo(sonUserInfo.get_id());
@@ -53,10 +53,6 @@ public class SonUserInfoController {
     public List<SonUserInfo> queryAllSonUserInfo(long fatherUserId){
         List<SonUserInfo> sonUserInfos = sonUserProvider.queryAllSonUserInfo(fatherUserId);
         return sonUserInfos;
-    }
-
-    public void deleUser(SonUserInfo sonUserInfo){
-        sonUserProvider.deleUser(sonUserInfo);
     }
 
 }
