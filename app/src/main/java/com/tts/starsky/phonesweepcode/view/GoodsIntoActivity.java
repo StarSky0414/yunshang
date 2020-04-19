@@ -15,6 +15,7 @@ import com.alibaba.fastjson.JSON;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.tts.starsky.phonesweepcode.R;
 import com.tts.starsky.phonesweepcode.controller.GoodsInfoController;
+import com.tts.starsky.phonesweepcode.controller.UserController;
 import com.tts.starsky.phonesweepcode.db.bean.GoodsInfo;
 import com.tts.starsky.phonesweepcode.db.bean.GoodsStock;
 import com.tts.starsky.phonesweepcode.db.provider.GoodsStockProvider;
@@ -38,7 +39,7 @@ public class GoodsIntoActivity extends Activity implements View.OnClickListener,
         goodsInfoController = new GoodsInfoController();
         goodsStockProvider = new GoodsStockProvider();
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_good_into);
         initView();
     }
 
@@ -96,7 +97,7 @@ public class GoodsIntoActivity extends Activity implements View.OnClickListener,
         goodsStock.setIntoStockNum(etIntoGoodNum);
         goodsStock.setIntoStockPrice(etInfoAllPrice / etIntoGoodNum);
         goodsStock.setResidueGoodsNum(goodsStock.getIntoStockNum());
-
+        goodsStock.setUserId(UserController.getUserId());
         goodsStockProvider.goodsStockInsert(goods_info, goodsStock);
     }
 

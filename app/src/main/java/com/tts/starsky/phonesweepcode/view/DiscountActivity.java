@@ -18,6 +18,7 @@ import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 import com.tts.starsky.phonesweepcode.R;
 import com.tts.starsky.phonesweepcode.adapter.DiscountAdapter;
 import com.tts.starsky.phonesweepcode.controller.DiscountController;
+import com.tts.starsky.phonesweepcode.controller.UserController;
 import com.tts.starsky.phonesweepcode.db.bean.Discount;
 import java.util.List;
 
@@ -156,6 +157,7 @@ public class DiscountActivity extends Activity implements RecyclerTouchListener.
 
                 finalDiscount.setDiscountName(discountName);
                 finalDiscount.setDiscountNum(Integer.valueOf(discountNum));
+                finalDiscount.setUserId(UserController.getUserId());
                 discountController.changeDiscount(finalDiscount);
 
                 if (position == -1){

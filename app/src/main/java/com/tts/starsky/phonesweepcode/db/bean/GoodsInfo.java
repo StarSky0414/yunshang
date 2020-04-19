@@ -23,15 +23,18 @@ public class GoodsInfo {
     private double nowPrice=0;
     private int newStockNum=0;
     private long typeId=0;
-    @Generated(hash = 160428439)
+    private Long userId;
+
+    @Generated(hash = 2026741351)
     public GoodsInfo(String goodsId, String goodsBarCode, String goodsName,
-            double nowPrice, int newStockNum, long typeId) {
+            double nowPrice, int newStockNum, long typeId, Long userId) {
         this.goodsId = goodsId;
         this.goodsBarCode = goodsBarCode;
         this.goodsName = goodsName;
         this.nowPrice = nowPrice;
         this.newStockNum = newStockNum;
         this.typeId = typeId;
+        this.userId = userId;
     }
     @Generated(hash = 1227172248)
     public GoodsInfo() {
@@ -83,5 +86,11 @@ public class GoodsInfo {
                 ", newStockNum=" + newStockNum +
                 ", typeId=" + typeId +
                 '}';
+    }
+    public Long getUserId() {
+        return this.userId;
+    }
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

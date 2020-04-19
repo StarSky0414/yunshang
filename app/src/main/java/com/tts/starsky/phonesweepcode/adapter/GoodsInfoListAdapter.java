@@ -9,11 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.tts.starsky.phonesweepcode.R;
-import com.tts.starsky.phonesweepcode.db.bean.Discount;
 import com.tts.starsky.phonesweepcode.db.bean.GoodsInfo;
-import com.tts.starsky.phonesweepcode.view.Init;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GoodsInfoListAdapter extends RecyclerView.Adapter<GoodsInfoListAdapter.GoodsInfoListViewHolder> {

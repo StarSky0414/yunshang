@@ -21,38 +21,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:paddingLeft="@dimen/margin_10"
-                android:paddingRight="@dimen/margin_10"
+                android:paddingLeft="50dp"
+                android:paddingTop="30dp"
                 android:text="用户小明"
                 android:textColor="@color/gray0"
                 android:textSize="@dimen/textSize_25"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tv_user_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_userName"
-                android:layout_marginTop="@dimen/margin_10"
-                android:paddingLeft="@dimen/margin_10"
-                android:paddingRight="@dimen/margin_10"
-                android:text="uid:1008009920"
-                android:textColor="@color/gray0" />
-
-            <TextView
-                android:id="@+id/tv_user_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_user_id"
-                android:paddingLeft="@dimen/margin_10"
-                android:paddingRight="@dimen/margin_10"
-                android:text="这是一句介绍我的话"
-                android:textColor="@color/gray0" />
 
             <ImageView
                 android:id="@+id/iv_userHead"
-                android:layout_width="70dp"
+                android:layout_width="120dp"
                 android:layout_height="70dp"
+                android:paddingRight="10dp"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/ic_userhead" />
 

@@ -57,13 +57,13 @@ public class BillActivity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 int action = event.getAction();
-                Toast.makeText(BillActivity.this, ""+action, Toast.LENGTH_SHORT).show();
+                Toast.makeText(BillActivity.this, "" + action, Toast.LENGTH_SHORT).show();
                 if (action == MotionEvent.ACTION_DOWN) {
 
                     Toast.makeText(BillActivity.this, "按下", Toast.LENGTH_SHORT).show();
-                    tv_profit.setText(String.format("%.2f", billBean.getProfit()-settlementAndProfitConcession));
+                    tv_profit.setText(String.format("%.2f", billBean.getProfit() - settlementAndProfitConcession));
 // 按下 处理相关逻辑
-                } else  {
+                } else {
                     Toast.makeText(BillActivity.this, "松开", Toast.LENGTH_SHORT).show();
                     tv_profit.setText("*******");
 //松开 处理相关逻辑

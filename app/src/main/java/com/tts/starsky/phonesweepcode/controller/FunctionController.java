@@ -43,10 +43,7 @@ public class FunctionController implements OSSCompletedCallback<ListObjectsReque
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Log.w(TAG, "版本大于 N ，开始使用 fileProvider 进行安装");
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            Uri contentUri = FileProvider.getUriForFile(
-                    context
-                    , "com.tts.starsky.phonesweepcode.fileprovider"
-                    , apkFile);
+            Uri contentUri = FileProvider.getUriForFile(context, "com.tts.starsky.phonesweepcode.fileprovider", apkFile);
             intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
         } else {
             Log.w(TAG, "正常进行安装");

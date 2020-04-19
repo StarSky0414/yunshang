@@ -2,6 +2,7 @@ package com.tts.starsky.phonesweepcode.view;
 
 import android.app.Application;
 
+import com.tts.starsky.phonesweepcode.controller.UserController;
 import com.tts.starsky.phonesweepcode.db.DBBase;
 import com.tts.starsky.phonesweepcode.db.bean.Discount;
 import com.tts.starsky.phonesweepcode.db.provider.DiscountProvider;
@@ -22,7 +23,7 @@ public class Init extends Application {
         super.onCreate();
         DBBase.dbBaseinit(this);
         OkHttpUtil.initOkHttp();
-        discountInfoInit();
+
         InitOssClient.initOssClient(this,OSSConfig.stsServer, OSSConfig.endPoint);
         SharedPreferencesUtil.init(this);
 //        new BackUp(this).appInitBackUpCheck();
@@ -31,11 +32,12 @@ public class Init extends Application {
     /**
      *  初始化折扣信息
      */
-    private void discountInfoInit(){
+    public static   void discountInfoInit(){
         // 设置一个默认
-        Discount discount = new Discount(0L, "无折扣", 100, DiscountUtile.WAY.valueOf(DiscountUtile.WAY.DISCOUNT.toString()).ordinal());
+        String userId = UserController.getFatherUserId();
+        Discount discount = new Discount(0L, "无折扣", 100, DiscountUtile.WAY.valueOf(DiscountUtile.WAY.DISCOUNT.toString()).ordinal(),Long.parseLong(userId));
         DiscountProvider discountProvider = new DiscountProvider();
-        discounts = discountProvider.discountQueryAll();
+        discounts = discountProvider.discountQueryAll(Long.parseLong(userId));
         discounts.add(0,discount);
     }
 

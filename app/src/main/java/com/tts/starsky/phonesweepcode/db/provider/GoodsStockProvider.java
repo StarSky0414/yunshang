@@ -1,5 +1,6 @@
 package com.tts.starsky.phonesweepcode.db.provider;
 
+import com.tts.starsky.phonesweepcode.controller.UserController;
 import com.tts.starsky.phonesweepcode.db.bean.GoodsInfo;
 import com.tts.starsky.phonesweepcode.db.bean.GoodsStock;
 import com.tts.starsky.phonesweepcode.db.dao.GoodsStockDao;
@@ -22,7 +23,7 @@ public class GoodsStockProvider extends DBProviderBase {
 
         int newStockNum = goodsInfo.getNewStockNum();
         goodsInfo.setNewStockNum(newStockNum + goodsStock.getIntoStockNum());  // 增加库存信息
-
+        goodsInfo.setUserId(Long.parseLong(UserController.getFatherUserId()));
         goodsInfoProvider.goodsInfoInsert(goodsInfo);  //保存商品信息
         long insert = dbSession.getGoodsStockDao().insert(goodsStock); // 保存库存信息
         return insert;
@@ -33,10 +34,11 @@ public class GoodsStockProvider extends DBProviderBase {
      * @param goodsBarCode 商品编码号
      * @return 最早商品入库信息
      */
-    public GoodsStock getGoodsStockByGoodsBarCode(String goodsBarCode) {
+    public GoodsStock getGoodsStockByGoodsBarCode(String goodsBarCode,long userId) {
         GoodsStock unique = dbSession.getGoodsStockDao().queryBuilder()
                 .where(GoodsStockDao.Properties.GoodsId.eq(goodsBarCode))
                 .where(GoodsStockDao.Properties.ResidueGoodsNum.notEq(0))
+                .where(GoodsStockDao.Properties.UserId.eq(userId))
                 .orderAsc(GoodsStockDao.Properties.StockId)
                 .limit(1).unique();
         return unique;

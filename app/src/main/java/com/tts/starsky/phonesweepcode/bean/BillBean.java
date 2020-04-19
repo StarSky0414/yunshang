@@ -19,6 +19,24 @@ public class BillBean {
     private double transferOfProfits;
     private double effectivelyPrice;
     private double profit;
+    private Long userFatherId;
+    private Long userSonId;
+
+    public Long getUserFatherId() {
+        return userFatherId;
+    }
+
+    public void setUserFatherId(Long userFatherId) {
+        this.userFatherId = userFatherId;
+    }
+
+    public Long getUserSonId() {
+        return userSonId;
+    }
+
+    public void setUserSonId(Long userSonId) {
+        this.userSonId = userSonId;
+    }
 
     public String getId() {
         return id;

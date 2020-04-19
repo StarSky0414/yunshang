@@ -19,17 +19,21 @@ public class Discount {
     private String discountName;
     private int discountNum=1;
     private int discountWay=0;
-    @Generated(hash = 79886066)
+    private Long userId;
+    @Generated(hash = 1071616738)
     public Discount(Long discountId, String discountName, int discountNum,
-            int discountWay) {
+            int discountWay, Long userId) {
         this.discountId = discountId;
         this.discountName = discountName;
         this.discountNum = discountNum;
         this.discountWay = discountWay;
+        this.userId = userId;
     }
     @Generated(hash = 1777606421)
     public Discount() {
     }
+
+
     public Long getDiscountId() {
         return this.discountId;
     }
@@ -63,5 +67,11 @@ public class Discount {
                 ", discountNum=" + discountNum +
                 ", discountWay=" + discountWay +
                 '}';
+    }
+    public Long getUserId() {
+        return this.userId;
+    }
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

@@ -18,7 +18,8 @@ public class DiscountController {
 
     // 获取所有折扣信息
     public List<Discount> getAllDiscount(){
-        List<Discount> discounts = discountProvider.discountQueryAll();
+        Long userId = UserController.getUserId();
+        List<Discount> discounts = discountProvider.discountQueryAll(userId);
         return discounts;
     }
 

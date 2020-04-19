@@ -36,9 +36,15 @@ public class UserInfo {
     // 描述
     private String descri;
 
-    @Generated(hash = 40649202)
+    // 描述
+    private String WiFiName;
+
+
+
+    @Generated(hash = 1103737019)
     public UserInfo(Long _id, String userPhoto, String account, String address,
-                    String phone, String userName, String passWord, String descri) {
+            String phone, String userName, String passWord, String descri,
+            String WiFiName) {
         this._id = _id;
         this.userPhoto = userPhoto;
         this.account = account;
@@ -47,6 +53,7 @@ public class UserInfo {
         this.userName = userName;
         this.passWord = passWord;
         this.descri = descri;
+        this.WiFiName = WiFiName;
     }
 
     @Generated(hash = 1279772520)
@@ -129,5 +136,13 @@ public class UserInfo {
 
     public void setDescri(String descri) {
         this.descri = descri;
+    }
+
+    public String getWiFiName() {
+        return this.WiFiName;
+    }
+
+    public void setWiFiName(String WiFiName) {
+        this.WiFiName = WiFiName;
     }
 }

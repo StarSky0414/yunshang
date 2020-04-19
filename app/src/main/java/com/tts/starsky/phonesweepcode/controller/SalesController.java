@@ -3,6 +3,7 @@ package com.tts.starsky.phonesweepcode.controller;
 import com.tts.starsky.phonesweepcode.db.bean.GoodsInfo;
 import com.tts.starsky.phonesweepcode.db.bean.Sales;
 import com.tts.starsky.phonesweepcode.db.bean.SalesToGoods;
+import com.tts.starsky.phonesweepcode.db.bean.UserInfo;
 import com.tts.starsky.phonesweepcode.db.provider.SalesProvider;
 import com.tts.starsky.phonesweepcode.db.provider.SalesToGoodsProvider;
 import com.tts.starsky.phonesweepcode.utile.SQL;
@@ -24,9 +25,17 @@ public class SalesController {
     }
 
     public List<Sales> showSalesAll() {
-        List<Sales> salesList = salesProvider.salesQueryAll();
+        UserInfo userInfo = UserController.getUserInfo();
+        List<Sales> salesList;
+        Long userId = userInfo.get_id();
+        if (UserController.isAdmin()) {
+            salesList = salesProvider.salesQueryAllByFatherUserId(userId);
+        } else {
+            salesList = salesProvider.salesQueryAllBySonUserId(userId);
+        }
         return salesList;
     }
+
 
     /**
      * 创建商品流水

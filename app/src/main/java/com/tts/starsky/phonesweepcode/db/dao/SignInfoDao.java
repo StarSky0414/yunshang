@@ -27,6 +27,8 @@ public class SignInfoDao extends AbstractDao<SignInfo, Long> {
         public final static Property _id = new Property(0, Long.class, "_id", true, "_id");
         public final static Property StartTime = new Property(1, String.class, "startTime", false, "START_TIME");
         public final static Property UserName = new Property(2, String.class, "userName", false, "USER_NAME");
+        public final static Property UserFatherId = new Property(3, Long.class, "userFatherId", false, "USER_FATHER_ID");
+        public final static Property UserSonId = new Property(4, Long.class, "userSonId", false, "USER_SON_ID");
     }
 
 
@@ -44,7 +46,9 @@ public class SignInfoDao extends AbstractDao<SignInfo, Long> {
         db.execSQL("CREATE TABLE " + constraint + "\"SIGN_INFO\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY ," + // 0: _id
                 "\"START_TIME\" TEXT," + // 1: startTime
-                "\"USER_NAME\" TEXT);"); // 2: userName
+                "\"USER_NAME\" TEXT," + // 2: userName
+                "\"USER_FATHER_ID\" INTEGER," + // 3: userFatherId
+                "\"USER_SON_ID\" INTEGER);"); // 4: userSonId
     }
 
     /** Drops the underlying database table. */
@@ -71,6 +75,16 @@ public class SignInfoDao extends AbstractDao<SignInfo, Long> {
         if (userName != null) {
             stmt.bindString(3, userName);
         }
+ 
+        Long userFatherId = entity.getUserFatherId();
+        if (userFatherId != null) {
+            stmt.bindLong(4, userFatherId);
+        }
+ 
+        Long userSonId = entity.getUserSonId();
+        if (userSonId != null) {
+            stmt.bindLong(5, userSonId);
+        }
     }
 
     @Override
@@ -91,6 +105,16 @@ public class SignInfoDao extends AbstractDao<SignInfo, Long> {
         if (userName != null) {
             stmt.bindString(3, userName);
         }
+ 
+        Long userFatherId = entity.getUserFatherId();
+        if (userFatherId != null) {
+            stmt.bindLong(4, userFatherId);
+        }
+ 
+        Long userSonId = entity.getUserSonId();
+        if (userSonId != null) {
+            stmt.bindLong(5, userSonId);
+        }
     }
 
     @Override
@@ -103,7 +127,9 @@ public class SignInfoDao extends AbstractDao<SignInfo, Long> {
         SignInfo entity = new SignInfo( //
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // _id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // startTime
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2) // userName
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // userName
+            cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3), // userFatherId
+            cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4) // userSonId
         );
         return entity;
     }
@@ -113,6 +139,8 @@ public class SignInfoDao extends AbstractDao<SignInfo, Long> {
         entity.set_id(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setStartTime(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setUserName(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setUserFatherId(cursor.isNull(offset + 3) ? null : cursor.getLong(offset + 3));
+        entity.setUserSonId(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
      }
     
     @Override

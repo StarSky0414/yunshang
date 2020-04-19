@@ -11,7 +11,8 @@ import android.widget.Toast;
 
 import com.tts.starsky.phonesweepcode.R;
 import com.tts.starsky.phonesweepcode.controller.UserController;
-import com.tts.starsky.phonesweepcode.view.admin.AdminManagerActivity;
+import com.tts.starsky.phonesweepcode.db.bean.UserInfo;
+import com.tts.starsky.phonesweepcode.view.activities.MainActivity;
 
 public class LoginActivity extends Activity {
 
@@ -41,14 +42,23 @@ public class LoginActivity extends Activity {
                 String et_passwordString = et_password.getText().toString().trim();
                 if (!et_userNameString.isEmpty() && !et_passwordString.isEmpty()) {
 
-                    if (UserController.isAdmin(et_userNameString,et_passwordString)){
-                        Intent intent = new Intent(LoginActivity.this, AdminManagerActivity.class);
-                        startActivity(intent);
-                        return;
-                    }
+//                    if (UserController.isAdmin(et_userNameString,et_passwordString)){
+//                        Intent intent = new Intent(LoginActivity.this, AdminManagerActivity.class);
+//                        startActivity(intent);
+//                        return;
+//                    }
 
                     if (userController.checkUserAccess(et_userNameString, et_passwordString)) {
-                        Intent intent = new Intent(LoginActivity.this, FunctionActivity.class);
+                        UserInfo userInfo = UserController.getUserInfo();
+                        System.out.println("==================" + userInfo.toString());
+                        if (UserController.isAdmin(userInfo)) {
+                            UserController.setAdminSign();
+                            System.out.println("==================是管理员！！！！");
+                        }
+                        // 设定父Id
+                        UserController.setFatherUserId(userInfo.getAccount());
+                        Init.discountInfoInit();
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                     } else {
                         Toast.makeText(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();

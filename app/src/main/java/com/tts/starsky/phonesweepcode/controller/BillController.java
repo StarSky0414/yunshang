@@ -55,8 +55,10 @@ public class BillController extends BaseController {
             ArrayList<BillGoodsPrice> billGoodsPrices = new ArrayList<>();
             goodsStockCount(goodsBarCode, goodsNum, billGoodsPrices);
 
+            // 只有管理员有这个功能
+            String fatherUserId = UserController.getFatherUserId();
             // goodsinfo 中库存扣除
-            goodsInfoProvider.decStockNum(goodsBarCode, goodsNum);
+            goodsInfoProvider.decStockNum(goodsBarCode, goodsNum,Long.parseLong(fatherUserId));
 
             // 商品销售List
             ArrayList<SalesToGoods> salesToGoodsArrayList = new ArrayList<>();
@@ -72,6 +74,10 @@ public class BillController extends BaseController {
                     // 盈亏计算
                     double mProfit = goodsDisconutPrice - billGoodsPrice.intoStockPrice;
                     salesToGoods.setProfit(mProfit);
+
+                    // 设定账单权限
+                    salesToGoods.setUserFatherId(Long.parseLong(UserController.getFatherUserId()));
+                    salesToGoods.setUserSonId(UserController.getUserId());
 
                     salesToGoodsArrayList.add(salesToGoods);
 
@@ -92,6 +98,8 @@ public class BillController extends BaseController {
         sales.setProfit(profit);
         sales.setOriginalPrice(originalPrice);
         sales.setRealityPrice(realityPrice);
+        sales.setUserFatherId(Long.parseLong(UserController.getFatherUserId()));
+        sales.setUserSonId(UserController.getUserId());
         salesProvider.salesInsert(sales);
 
         // 创建要向下层传递的bean
@@ -101,13 +109,16 @@ public class BillController extends BaseController {
         billBean.setTransferOfProfits(originalPrice-realityPrice);
         billBean.setEffectivelyPrice(realityPrice);
         billBean.setProfit(profit);
-
+        billBean.setUserFatherId(Long.parseLong(UserController.getFatherUserId()));
+        billBean.setUserSonId(UserController.getUserId());
         return billBean;
 
     }
 
     private void goodsStockCount(String goodsBarCode, int goodsNum, ArrayList<BillGoodsPrice> billGoodsPrices) {
-        GoodsStock goodsStockByGoodsBarCode = goodsStockProvider.getGoodsStockByGoodsBarCode(goodsBarCode);
+        String fatherUserId = UserController.getFatherUserId();
+        // 获取主账户的库存信息
+        GoodsStock goodsStockByGoodsBarCode = goodsStockProvider.getGoodsStockByGoodsBarCode(goodsBarCode,Long.parseLong(fatherUserId));
         int tempNum = goodsStockByGoodsBarCode.getResidueGoodsNum() - goodsNum;
         BillGoodsPrice billGoodsPrice = new BillGoodsPrice();
         // 如果库存量足够
@@ -124,7 +135,6 @@ public class BillController extends BaseController {
         }
         billGoodsPrice.intoStockPrice = goodsStockByGoodsBarCode.getIntoStockPrice();
         billGoodsPrices.add(billGoodsPrice);
-
     }
 
 

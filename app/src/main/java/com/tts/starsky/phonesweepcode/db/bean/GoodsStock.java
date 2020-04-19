@@ -1,10 +1,8 @@
 package com.tts.starsky.phonesweepcode.db.bean;
 
-import android.util.Log;
-
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 
 /**
  * 进货id
@@ -23,14 +21,17 @@ public class GoodsStock {
     private double intoStockPrice=0;
     private int intoStockNum=0;
     private int residueGoodsNum=0;
-    @Generated(hash = 1954877351)
+    private Long userId;
+
+    @Generated(hash = 1057694018)
     public GoodsStock(Long stockId, String goodsId, double intoStockPrice,
-            int intoStockNum, int residueGoodsNum) {
+            int intoStockNum, int residueGoodsNum, Long userId) {
         this.stockId = stockId;
         this.goodsId = goodsId;
         this.intoStockPrice = intoStockPrice;
         this.intoStockNum = intoStockNum;
         this.residueGoodsNum = residueGoodsNum;
+        this.userId = userId;
     }
     @Generated(hash = 16825727)
     public GoodsStock() {
@@ -75,5 +76,11 @@ public class GoodsStock {
                 ", intoStockNum=" + intoStockNum +
                 ", residueGoodsNum=" + residueGoodsNum +
                 '}';
+    }
+    public Long getUserId() {
+        return this.userId;
+    }
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

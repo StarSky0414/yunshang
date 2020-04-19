@@ -18,10 +18,11 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.google.zxing.integration.android.IntentIntegrator;
-import com.tts.starsky.phonesweepcode.bean.Data;
-import com.tts.starsky.phonesweepcode.adapter.AccountsAdapter;
 import com.tts.starsky.phonesweepcode.R;
+import com.tts.starsky.phonesweepcode.adapter.AccountsAdapter;
+import com.tts.starsky.phonesweepcode.bean.Data;
 import com.tts.starsky.phonesweepcode.controller.PlaceOrderController;
+import com.tts.starsky.phonesweepcode.controller.UserController;
 import com.tts.starsky.phonesweepcode.db.bean.Discount;
 import com.tts.starsky.phonesweepcode.db.bean.GoodsInfo;
 import com.tts.starsky.phonesweepcode.db.provider.GoodsInfoProvider;
@@ -178,7 +179,8 @@ public class AccountsActivity extends Activity implements View.OnClickListener {
 //            queryGoodsInfoByDB(theresult);
 //            GoodsInfo goodsInfo = new GoodsInfo(theresult, theresult, "冰红茶", 10, 20);
             GoodsInfoProvider goodsInfoProvider = new GoodsInfoProvider();
-            GoodsInfo goodsInfo = goodsInfoProvider.goodsQueryByBrCode(theresult);
+            String fatherUserId = UserController.getFatherUserId();
+            GoodsInfo goodsInfo = goodsInfoProvider.goodsQueryByBrCode(theresult,Long.parseLong(fatherUserId));
 
             if (goodsInfo == null || goodsInfo.getGoodsBarCode().equals("")){
                 Toast.makeText(this, "商品未添加,请添加商品后进项出售！", Toast.LENGTH_SHORT).show();

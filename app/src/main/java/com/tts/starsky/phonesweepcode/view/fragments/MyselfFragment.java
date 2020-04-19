@@ -21,6 +21,9 @@ import com.tts.starsky.phonesweepcode.db.bean.UserInfo;
 import com.tts.starsky.phonesweepcode.utile.GlideCircleTransform;
 import com.tts.starsky.phonesweepcode.utile.RealPathFromUriUtils;
 import com.tts.starsky.phonesweepcode.utile.SharedPreferencesUtil;
+import com.tts.starsky.phonesweepcode.view.DiscountActivity;
+import com.tts.starsky.phonesweepcode.view.SetActivity;
+import com.tts.starsky.phonesweepcode.view.SonUserActivity;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -39,9 +42,11 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
     }
 
 
-//    private View fragment_myself;
+    //    private View fragment_myself;
     private LinearLayout ll_userHead;
     private RelativeLayout ll_bill_manager;
+    private RelativeLayout ll_set_manager;
+    private RelativeLayout ll_son_manager;
     private RelativeLayout ll_add_shop;
     private ImageView iv_order;
     private ImageView iv_add_shop;
@@ -72,19 +77,22 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         Glide.with(this).load(userInfo.getUserPhoto()).placeholder(R.drawable.ic_userhead).bitmapTransform(new GlideCircleTransform(getActivity())).into(iv_userHead);
 
         tv_userName.setText(userInfo.getUserName());
-        tv_user_description.setText("个性签名：" + userInfo.getDescri());
-        tv_user_id.setText("uid：00000" + String.valueOf(UserController.getUserId()));
+//        tv_user_description.setText("个性签名：" + userInfo.getDescri());
+//        tv_user_id.setText("uid：00000" + String.valueOf(UserController.getUserId()));
 
-//        rv_my_bbs.setLayoutManager(manager);
+        ll_bill_manager.setOnClickListener(this);
 //        rv_my_bbs.setAdapter(trendsInfoAdapter);
     }
 
     private void initView() {
 
 
+        ll_bill_manager = fragment_myself.findViewById(R.id.ll_bill_manager);
+        ll_set_manager = fragment_myself.findViewById(R.id.ll_set_manager);
+        ll_son_manager = fragment_myself.findViewById(R.id.ll_son_manager);
         tv_userName = fragment_myself.findViewById(R.id.tv_userName);
-        tv_user_id = fragment_myself.findViewById(R.id.tv_user_id);
-        tv_user_description = fragment_myself.findViewById(R.id.tv_user_description);
+//        tv_user_id = fragment_myself.findViewById(R.id.tv_user_id);
+//        tv_user_description = fragment_myself.findViewById(R.id.tv_user_description);
 
         iv_userHead = fragment_myself.findViewById(R.id.iv_userHead);
         iv_userHead.setOnLongClickListener(new View.OnLongClickListener() {
@@ -98,6 +106,8 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
             }
         });
         iv_userHead.setOnClickListener(this);
+        ll_set_manager.setOnClickListener(this);
+        ll_son_manager.setOnClickListener(this);
 
 //        ll_out.setOnClickListener(this);
     }
@@ -105,7 +115,18 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-//            case R.id.ll_set:
+            case R.id.ll_bill_manager:
+                Intent intent1 = new Intent(getActivity(), DiscountActivity.class);
+                startActivity(intent1);
+                break;
+            case R.id.ll_set_manager:
+                Intent intent2 = new Intent(getActivity(), SetActivity.class);
+                startActivity(intent2);
+                break;
+            case R.id.ll_son_manager:
+                Intent intent3 = new Intent(getActivity(), SonUserActivity.class);
+                startActivity(intent3);
+                break;
 //            case R.id.iv_set:
 //            case R.id.tv_set:
 //                break;
@@ -125,6 +146,7 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
 //                Intent intent1 = new Intent(getContext(), ChangeUserInfo.class);
 //                startActivity(intent1);
                 break;
+
 //            case R.id.ll_out:
 //                Intent intent4 = new Intent(getContext(), LoginActivity.class);
 //                startActivity(intent4);

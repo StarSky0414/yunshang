@@ -3,7 +3,6 @@ package com.tts.starsky.phonesweepcode.view;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,33 +17,27 @@ import com.nikhilpanju.recyclerviewenhanced.OnActivityTouchListener;
 import com.nikhilpanju.recyclerviewenhanced.RecyclerTouchListener;
 import com.tts.starsky.phonesweepcode.R;
 import com.tts.starsky.phonesweepcode.adapter.GoodsInfoListAdapter;
-import com.tts.starsky.phonesweepcode.controller.GoodsInfoLIstController;
-import com.tts.starsky.phonesweepcode.db.bean.GoodsInfo;
-import com.tts.starsky.phonesweepcode.db.provider.GoodsStockProvider;
+import com.tts.starsky.phonesweepcode.adapter.SonUserListAdapter;
+import com.tts.starsky.phonesweepcode.controller.UserController;
+import com.tts.starsky.phonesweepcode.db.bean.UserInfo;
 
 import java.util.List;
 
-/**
- *  商品信息类
- */
-public class GoodsInfoActivityList extends Activity implements RecyclerTouchListener.RecyclerTouchListenerHelper,View.OnClickListener {
+public class SonUserActivity extends Activity implements RecyclerTouchListener.RecyclerTouchListenerHelper, View.OnClickListener {
 
     private RecyclerView mRecyclerView;
     private RecyclerTouchListener onTouchListener;
     private OnActivityTouchListener touchListener;
-    private GoodsInfoListAdapter mAdapter;
+    private SonUserListAdapter mAdapter;
     private EditText et_discount_name;
     private EditText et_discount_num;
-    private GoodsStockProvider  goodsStockProvider;
-    private GoodsInfoLIstController  goodsInfoLIstController;
+    private UserController userController;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_goods_info_list);
-        goodsStockProvider = new GoodsStockProvider();
-
+        setContentView(R.layout.activity_son_info_list);
         initRecyclerView();
 
         // 初始化弹窗信息，用于添加数据
@@ -62,16 +55,17 @@ public class GoodsInfoActivityList extends Activity implements RecyclerTouchList
      */
     private void initRecyclerView() {
 
-        goodsInfoLIstController = new GoodsInfoLIstController();
+        userController = new UserController();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
-        List<GoodsInfo> allGoodsInfo = goodsInfoLIstController.getAllGoodsInfo();
-        if (allGoodsInfo != null && allGoodsInfo.size()!=0){
+        final Long userId = UserController.getUserId();
+        List<UserInfo> userInfoList = userController.queryAllSonUserInfo(userId);
+        if (userInfoList != null && userInfoList.size() != 0) {
 
         }
 
-        mAdapter = new GoodsInfoListAdapter(this,getData() );
+        mAdapter = new SonUserListAdapter(this, getData());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -83,28 +77,28 @@ public class GoodsInfoActivityList extends Activity implements RecyclerTouchList
                     @Override
                     public void onSwipeOptionClicked(int viewID, int position) {
                         String message = "";
-                        GoodsInfo goodsInfo = GoodsInfoListAdapter.goodsInfos.get(position);
+                        UserInfo userInfo = SonUserListAdapter.userInfos.get(position);
                         if (viewID == R.id.edit) {
                             message += "Edit";
 
-                            dialogChange(goodsInfo,position);
+                            dialogChange(userInfo, position);
 
                         } else if (viewID == R.id.dele) {
                             message += "Dele";
                             GoodsInfoListAdapter.goodsInfos.remove(position);
                             mAdapter.notifyItemRemoved(position);
-                            String goodsId =goodsInfo .getGoodsId();
-                            goodsInfoLIstController.deleGoodsInfo(goodsId);
+                            userController.delUser(userInfo);
                         }
                         message += " clicked for row " + (position + 1);
-                        Toast.makeText(GoodsInfoActivityList.this, message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SonUserActivity.this, message, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
     // 获取数据信息
-    private List<GoodsInfo> getData() {
-        List<GoodsInfo> allDiscount = goodsInfoLIstController.getAllGoodsInfo();
+    private List<UserInfo> getData() {
+        Long userId = UserController.getUserId();
+        List<UserInfo> allDiscount = userController.queryAllSonUserInfo(userId);
         return allDiscount;
     }
 
@@ -136,53 +130,51 @@ public class GoodsInfoActivityList extends Activity implements RecyclerTouchList
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.iv_add_discount){
-//            dialogAdd();
-            startActivity(new Intent(GoodsInfoActivityList.this,AddGoodInfoActivity.class));
-
+        if (v.getId() == R.id.iv_add_discount) {
+            dialogAdd();
         }
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        mAdapter = new GoodsInfoListAdapter(this,getData());
+        mAdapter = new SonUserListAdapter(this, getData());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private void dialogChange(final GoodsInfo goodsInfo, final int position){
+    private void dialogChange(final UserInfo userInfo, final int position) {
 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("商品管理");
-        View view = LayoutInflater.from(this).inflate(R.layout.dialog_goods_info, null);
+        builder.setTitle("修改员工");
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_son_info, null);
         builder.setView(view);
-        final EditText et_discount_name = (EditText) view.findViewById(R.id.et_discount_name);
-        final EditText et_discount_num = (EditText) view.findViewById(R.id.et_discount_num);
+        final EditText et_discount_son_name = (EditText) view.findViewById(R.id.et_discount_son_name);
+        final EditText et_discount_son_password = (EditText) view.findViewById(R.id.et_discount_son_password);
 
-        if (goodsInfo != null) {
-            int newStockNum = goodsInfo.getNewStockNum();
-            double nowPrice = goodsInfo.getNowPrice();
-            et_discount_name.setText(String.valueOf(nowPrice));
-            et_discount_num.setText(String.valueOf(newStockNum));
+        if (userInfo != null) {
+            String userName = userInfo.getUserName();
+            String passWord = userInfo.getPassWord();
+            et_discount_son_name.setText(String.valueOf(userName));
+            et_discount_son_password.setText(String.valueOf(passWord));
 
         }
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String newStockNum = et_discount_name.getText().toString();
-                String discountNum = et_discount_num.getText().toString();
+                String userName = et_discount_son_name.getText().toString();
+                String passWord = et_discount_son_password.getText().toString();
 
-                goodsInfo.setNewStockNum(Integer.valueOf(newStockNum));
-                goodsInfo.setNowPrice(Double.valueOf(discountNum));
-                goodsInfoLIstController.changeGoodsInfo(goodsInfo);
+                userInfo.setUserName(userName);
+                userInfo.setPassWord(passWord);
+                userController.change(userInfo);
 
-                if (position == -1){
-                    GoodsInfoListAdapter.goodsInfos.add(goodsInfo);
-                    mAdapter.notifyItemChanged(Init.discounts.size()-1);
-                }else {
-                    GoodsInfoListAdapter.goodsInfos.set(position,goodsInfo);
+                if (position == -1) {
+                    SonUserListAdapter.userInfos.add(userInfo);
+                    mAdapter.notifyItemChanged(Init.discounts.size() - 1);
+                } else {
+                    SonUserListAdapter.userInfos.set(position, userInfo);
                     mAdapter.notifyItemChanged(position);
                 }
             }
@@ -196,6 +188,39 @@ public class GoodsInfoActivityList extends Activity implements RecyclerTouchList
         builder.show();
     }
 
+    private void dialogAdd() {
+
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("添加员工");
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_son_info, null);
+        builder.setView(view);
+        final EditText et_discount_son_name = (EditText) view.findViewById(R.id.et_discount_son_name);
+        final EditText et_discount_son_password = (EditText) view.findViewById(R.id.et_discount_son_password);
+
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String userName = et_discount_son_name.getText().toString();
+                String passWord = et_discount_son_password.getText().toString();
+                UserInfo userInfo = new UserInfo();
+                userInfo.setUserName(userName);
+                userInfo.setPassWord(passWord);
+                userInfo.setAccount(String.valueOf(UserController.getUserId()));
+                userController.change(userInfo);
+                SonUserListAdapter.userInfos.add(userInfo);
+                mAdapter.notifyItemChanged(Init.discounts.size() - 1);
+
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
+    }
 
 
 }

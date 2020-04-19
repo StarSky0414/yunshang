@@ -30,8 +30,9 @@ public class DiscountProvider extends DBProviderBase{
     }
 
     // 查询所有数据信息
-    public List<Discount> discountQueryAll(){
-        List<Discount> discountList = discountDao.queryBuilder().list();
+    public List<Discount> discountQueryAll(Long userId){
+
+        List<Discount> discountList = discountDao.queryBuilder().where(DiscountDao.Properties.UserId.eq(userId)).list();
         return discountList;
     }
 

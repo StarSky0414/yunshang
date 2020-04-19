@@ -32,6 +32,7 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         public final static Property UserName = new Property(5, String.class, "userName", false, "USER_NAME");
         public final static Property PassWord = new Property(6, String.class, "passWord", false, "PASS_WORD");
         public final static Property Descri = new Property(7, String.class, "descri", false, "DESCRI");
+        public final static Property WiFiName = new Property(8, String.class, "WiFiName", false, "WI_FI_NAME");
     }
 
 
@@ -54,7 +55,8 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
                 "\"PHONE\" TEXT," + // 4: phone
                 "\"USER_NAME\" TEXT," + // 5: userName
                 "\"PASS_WORD\" TEXT," + // 6: passWord
-                "\"DESCRI\" TEXT);"); // 7: descri
+                "\"DESCRI\" TEXT," + // 7: descri
+                "\"WI_FI_NAME\" TEXT);"); // 8: WiFiName
     }
 
     /** Drops the underlying database table. */
@@ -106,6 +108,11 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         if (descri != null) {
             stmt.bindString(8, descri);
         }
+ 
+        String WiFiName = entity.getWiFiName();
+        if (WiFiName != null) {
+            stmt.bindString(9, WiFiName);
+        }
     }
 
     @Override
@@ -151,6 +158,11 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         if (descri != null) {
             stmt.bindString(8, descri);
         }
+ 
+        String WiFiName = entity.getWiFiName();
+        if (WiFiName != null) {
+            stmt.bindString(9, WiFiName);
+        }
     }
 
     @Override
@@ -168,7 +180,8 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // phone
             cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // userName
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // passWord
-            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7) // descri
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // descri
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8) // WiFiName
         );
         return entity;
     }
@@ -183,6 +196,7 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         entity.setUserName(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
         entity.setPassWord(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setDescri(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setWiFiName(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
      }
     
     @Override

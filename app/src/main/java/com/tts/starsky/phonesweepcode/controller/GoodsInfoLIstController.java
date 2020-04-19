@@ -18,11 +18,13 @@ public class GoodsInfoLIstController {
 
     // 获取所有商品信息
     public List<GoodsInfo> getAllGoodsInfo(){
-        List<GoodsInfo> goodsInfos = goodsInfoProvider.showAllGoodsInfoList();
+        Long userId = UserController.getUserId();
+        List<GoodsInfo> goodsInfos = goodsInfoProvider.showAllGoodsInfoList(userId);
         return goodsInfos;
     }
 
     public void addGoodsInfo(GoodsInfo goodsInfo) {
+        goodsInfo.setUserId(Long.parseLong(UserController.getFatherUserId()));
         goodsInfoProvider.goodsInfoInsert(goodsInfo);
     }
     // 删除商品信息

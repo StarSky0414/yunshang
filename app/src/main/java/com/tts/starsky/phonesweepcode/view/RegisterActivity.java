@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.tts.starsky.phonesweepcode.R;
 import com.tts.starsky.phonesweepcode.controller.UserController;
+import com.tts.starsky.phonesweepcode.db.bean.UserInfo;
 
 
 public class RegisterActivity extends Activity {
@@ -39,9 +40,13 @@ public class RegisterActivity extends Activity {
                     Toast.makeText(RegisterActivity.this, "已存在用户，自动登录", Toast.LENGTH_SHORT).show();
                 }
                 if (!et_userNumber.getText().toString().trim().isEmpty()&&!et_userNumber.getText().toString().trim().isEmpty()){
-                    userController.setUserNameAndPassWord(et_userNumber.getText().toString().trim(),et_userNumber.getText().toString().trim());
+                    UserInfo userInfo = userController.setUserNameAndPassWord(et_userNumber.getText().toString().trim(), et_userNumber.getText().toString().trim());
                     Toast.makeText(RegisterActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
                     userController.checkUserAccess(et_userNumber.getText().toString().trim(),et_userNumber.getText().toString().trim());
+                    UserController.setAdminSign();
+                    // 设定父Id
+                    UserController.setFatherUserId(userInfo.getAccount());
+                    Init.discountInfoInit();
                     Intent intent = new Intent(RegisterActivity.this,FunctionActivity.class);
                     startActivity(intent);
                 }if (et_userNumber.getText().toString().trim().isEmpty()){

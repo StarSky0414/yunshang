@@ -28,6 +28,7 @@ public class DiscountDao extends AbstractDao<Discount, Long> {
         public final static Property DiscountName = new Property(1, String.class, "discountName", false, "DISCOUNT_NAME");
         public final static Property DiscountNum = new Property(2, int.class, "discountNum", false, "DISCOUNT_NUM");
         public final static Property DiscountWay = new Property(3, int.class, "discountWay", false, "DISCOUNT_WAY");
+        public final static Property UserId = new Property(4, Long.class, "userId", false, "USER_ID");
     }
 
 
@@ -46,7 +47,8 @@ public class DiscountDao extends AbstractDao<Discount, Long> {
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: discountId
                 "\"DISCOUNT_NAME\" TEXT," + // 1: discountName
                 "\"DISCOUNT_NUM\" INTEGER NOT NULL ," + // 2: discountNum
-                "\"DISCOUNT_WAY\" INTEGER NOT NULL );"); // 3: discountWay
+                "\"DISCOUNT_WAY\" INTEGER NOT NULL ," + // 3: discountWay
+                "\"USER_ID\" INTEGER);"); // 4: userId
     }
 
     /** Drops the underlying database table. */
@@ -70,6 +72,11 @@ public class DiscountDao extends AbstractDao<Discount, Long> {
         }
         stmt.bindLong(3, entity.getDiscountNum());
         stmt.bindLong(4, entity.getDiscountWay());
+ 
+        Long userId = entity.getUserId();
+        if (userId != null) {
+            stmt.bindLong(5, userId);
+        }
     }
 
     @Override
@@ -87,6 +94,11 @@ public class DiscountDao extends AbstractDao<Discount, Long> {
         }
         stmt.bindLong(3, entity.getDiscountNum());
         stmt.bindLong(4, entity.getDiscountWay());
+ 
+        Long userId = entity.getUserId();
+        if (userId != null) {
+            stmt.bindLong(5, userId);
+        }
     }
 
     @Override
@@ -100,7 +112,8 @@ public class DiscountDao extends AbstractDao<Discount, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // discountId
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // discountName
             cursor.getInt(offset + 2), // discountNum
-            cursor.getInt(offset + 3) // discountWay
+            cursor.getInt(offset + 3), // discountWay
+            cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4) // userId
         );
         return entity;
     }
@@ -111,6 +124,7 @@ public class DiscountDao extends AbstractDao<Discount, Long> {
         entity.setDiscountName(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setDiscountNum(cursor.getInt(offset + 2));
         entity.setDiscountWay(cursor.getInt(offset + 3));
+        entity.setUserId(cursor.isNull(offset + 4) ? null : cursor.getLong(offset + 4));
      }
     
     @Override

@@ -34,7 +34,8 @@ public class GoodsInfoController implements Callback{
      * @return
      */
     public List<GoodsInfo> showAllGoodsInfoList() {
-       List<GoodsInfo> goodsInfoList =  goodsInfoProvider.showAllGoodsInfoList();
+        Long userId = UserController.getUserId();
+        List<GoodsInfo> goodsInfoList =  goodsInfoProvider.showAllGoodsInfoList(userId);
         return goodsInfoList;
     }
 
@@ -42,16 +43,19 @@ public class GoodsInfoController implements Callback{
      * 显示单个商品信息
      */
     public GoodsInfo showGoodsInfo(String brCode) {
-        GoodsInfo goodsInfo = goodsInfoProvider.goodsQueryByBrCode(brCode);
+        Long userId = UserController.getUserId();
+        GoodsInfo goodsInfo = goodsInfoProvider.goodsQueryByBrCode(brCode,userId);
         return goodsInfo;
     }
 
-    public void save(GoodsInfo goods_info) {
-        goodsInfoProvider.goodsInfoInsert(goods_info);
+    public void save(GoodsInfo goodsInfo) {
+        goodsInfo.setUserId(Long.parseLong(UserController.getFatherUserId()));
+        goodsInfoProvider.goodsInfoInsert(goodsInfo);
     }
 
     public GoodsInfo getGoodsInfoByDB(String theresult) {
-        GoodsInfo goods_info = goodsInfoProvider.goodsQueryByBrCode(theresult);
+        Long userId = UserController.getUserId();
+        GoodsInfo goods_info = goodsInfoProvider.goodsQueryByBrCode(theresult,userId);
         if (goods_info == null) {
             goods_info = new GoodsInfo();
             goods_info.setGoodsBarCode(theresult);

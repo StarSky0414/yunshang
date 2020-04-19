@@ -3,10 +3,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/ll_good"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="1"
-        android:textSize="100dp" />
+        android:layout_height="250dp"
+        android:background="@drawable/bag"
+        android:orientation="horizontal"
+        android:paddingTop="80dp">
+
+        <TextView
+            android:id="@+id/tv_good_manage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginHorizontal="80dp"
+            android:background="#ADFFFFFF"
+            android:gravity="center"
+            android:text="商品管理"></TextView>
+
+        <TextView
+            android:id="@+id/tv_good_into_manage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="#ADFFFFFF"
+            android:gravity="center"
+            android:text="进货管理"></TextView>
+        <TextView
+            android:id="@+id/tv_accounts_manage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginHorizontal="150dp"
+            android:background="#ADFFFFFF"
+            android:gravity="center"
+            android:text="扫码"></TextView>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_photo_wall"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_good"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"></android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

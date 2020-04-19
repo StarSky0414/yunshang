@@ -29,6 +29,7 @@ public class GoodsStockDao extends AbstractDao<GoodsStock, Long> {
         public final static Property IntoStockPrice = new Property(2, double.class, "intoStockPrice", false, "INTO_STOCK_PRICE");
         public final static Property IntoStockNum = new Property(3, int.class, "intoStockNum", false, "INTO_STOCK_NUM");
         public final static Property ResidueGoodsNum = new Property(4, int.class, "residueGoodsNum", false, "RESIDUE_GOODS_NUM");
+        public final static Property UserId = new Property(5, Long.class, "userId", false, "USER_ID");
     }
 
 
@@ -48,7 +49,8 @@ public class GoodsStockDao extends AbstractDao<GoodsStock, Long> {
                 "\"GOODS_ID\" TEXT," + // 1: goodsId
                 "\"INTO_STOCK_PRICE\" REAL NOT NULL ," + // 2: intoStockPrice
                 "\"INTO_STOCK_NUM\" INTEGER NOT NULL ," + // 3: intoStockNum
-                "\"RESIDUE_GOODS_NUM\" INTEGER NOT NULL );"); // 4: residueGoodsNum
+                "\"RESIDUE_GOODS_NUM\" INTEGER NOT NULL ," + // 4: residueGoodsNum
+                "\"USER_ID\" INTEGER);"); // 5: userId
     }
 
     /** Drops the underlying database table. */
@@ -73,6 +75,11 @@ public class GoodsStockDao extends AbstractDao<GoodsStock, Long> {
         stmt.bindDouble(3, entity.getIntoStockPrice());
         stmt.bindLong(4, entity.getIntoStockNum());
         stmt.bindLong(5, entity.getResidueGoodsNum());
+ 
+        Long userId = entity.getUserId();
+        if (userId != null) {
+            stmt.bindLong(6, userId);
+        }
     }
 
     @Override
@@ -91,6 +98,11 @@ public class GoodsStockDao extends AbstractDao<GoodsStock, Long> {
         stmt.bindDouble(3, entity.getIntoStockPrice());
         stmt.bindLong(4, entity.getIntoStockNum());
         stmt.bindLong(5, entity.getResidueGoodsNum());
+ 
+        Long userId = entity.getUserId();
+        if (userId != null) {
+            stmt.bindLong(6, userId);
+        }
     }
 
     @Override
@@ -105,7 +117,8 @@ public class GoodsStockDao extends AbstractDao<GoodsStock, Long> {
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // goodsId
             cursor.getDouble(offset + 2), // intoStockPrice
             cursor.getInt(offset + 3), // intoStockNum
-            cursor.getInt(offset + 4) // residueGoodsNum
+            cursor.getInt(offset + 4), // residueGoodsNum
+            cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5) // userId
         );
         return entity;
     }
@@ -117,6 +130,7 @@ public class GoodsStockDao extends AbstractDao<GoodsStock, Long> {
         entity.setIntoStockPrice(cursor.getDouble(offset + 2));
         entity.setIntoStockNum(cursor.getInt(offset + 3));
         entity.setResidueGoodsNum(cursor.getInt(offset + 4));
+        entity.setUserId(cursor.isNull(offset + 5) ? null : cursor.getLong(offset + 5));
      }
     
     @Override

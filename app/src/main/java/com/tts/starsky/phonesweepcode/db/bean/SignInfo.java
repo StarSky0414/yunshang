@@ -21,11 +21,18 @@ public class SignInfo {
     // 签到人员
     private String userName;
 
-    @Generated(hash = 849071653)
-    public SignInfo(Long _id, String startTime, String userName) {
+    private Long userFatherId;
+
+    private Long userSonId;
+
+    @Generated(hash = 864625756)
+    public SignInfo(Long _id, String startTime, String userName, Long userFatherId,
+            Long userSonId) {
         this._id = _id;
         this.startTime = startTime;
         this.userName = userName;
+        this.userFatherId = userFatherId;
+        this.userSonId = userSonId;
     }
 
     @Generated(hash = 1879720682)
@@ -64,5 +71,21 @@ public class SignInfo {
                 ", startTime='" + startTime + '\'' +
                 ", userName='" + userName + '\'' +
                 '}';
+    }
+
+    public Long getUserFatherId() {
+        return this.userFatherId;
+    }
+
+    public void setUserFatherId(Long userFatherId) {
+        this.userFatherId = userFatherId;
+    }
+
+    public Long getUserSonId() {
+        return this.userSonId;
+    }
+
+    public void setUserSonId(Long userSonId) {
+        this.userSonId = userSonId;
     }
 }

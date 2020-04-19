@@ -14,7 +14,8 @@ public class PlaceOrderController {
     }
 
     public List<Discount> getDiscountData(){
-        List<Discount> discounts = discountProvider.discountQueryAll();
+        Long userId = UserController.getUserId();
+        List<Discount> discounts = discountProvider.discountQueryAll(userId);
         return discounts;
     }
 

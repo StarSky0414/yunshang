@@ -40,6 +40,8 @@ public class SalesToGoodsDao extends AbstractDao<SalesToGoods, Long> {
         public final static Property RealityPrice = new Property(5, double.class, "realityPrice", false, "REALITY_PRICE");
         public final static Property DiscountId = new Property(6, long.class, "discountId", false, "DISCOUNT_ID");
         public final static Property Profit = new Property(7, double.class, "profit", false, "PROFIT");
+        public final static Property UserFatherId = new Property(8, Long.class, "userFatherId", false, "USER_FATHER_ID");
+        public final static Property UserSonId = new Property(9, Long.class, "userSonId", false, "USER_SON_ID");
     }
 
     private DaoSession daoSession;
@@ -66,7 +68,9 @@ public class SalesToGoodsDao extends AbstractDao<SalesToGoods, Long> {
                 "\"ORIGINAL_PRICE\" REAL NOT NULL ," + // 4: originalPrice
                 "\"REALITY_PRICE\" REAL NOT NULL ," + // 5: realityPrice
                 "\"DISCOUNT_ID\" INTEGER NOT NULL ," + // 6: discountId
-                "\"PROFIT\" REAL NOT NULL );"); // 7: profit
+                "\"PROFIT\" REAL NOT NULL ," + // 7: profit
+                "\"USER_FATHER_ID\" INTEGER," + // 8: userFatherId
+                "\"USER_SON_ID\" INTEGER);"); // 9: userSonId
     }
 
     /** Drops the underlying database table. */
@@ -98,6 +102,16 @@ public class SalesToGoodsDao extends AbstractDao<SalesToGoods, Long> {
         stmt.bindDouble(6, entity.getRealityPrice());
         stmt.bindLong(7, entity.getDiscountId());
         stmt.bindDouble(8, entity.getProfit());
+ 
+        Long userFatherId = entity.getUserFatherId();
+        if (userFatherId != null) {
+            stmt.bindLong(9, userFatherId);
+        }
+ 
+        Long userSonId = entity.getUserSonId();
+        if (userSonId != null) {
+            stmt.bindLong(10, userSonId);
+        }
     }
 
     @Override
@@ -123,6 +137,16 @@ public class SalesToGoodsDao extends AbstractDao<SalesToGoods, Long> {
         stmt.bindDouble(6, entity.getRealityPrice());
         stmt.bindLong(7, entity.getDiscountId());
         stmt.bindDouble(8, entity.getProfit());
+ 
+        Long userFatherId = entity.getUserFatherId();
+        if (userFatherId != null) {
+            stmt.bindLong(9, userFatherId);
+        }
+ 
+        Long userSonId = entity.getUserSonId();
+        if (userSonId != null) {
+            stmt.bindLong(10, userSonId);
+        }
     }
 
     @Override
@@ -146,7 +170,9 @@ public class SalesToGoodsDao extends AbstractDao<SalesToGoods, Long> {
             cursor.getDouble(offset + 4), // originalPrice
             cursor.getDouble(offset + 5), // realityPrice
             cursor.getLong(offset + 6), // discountId
-            cursor.getDouble(offset + 7) // profit
+            cursor.getDouble(offset + 7), // profit
+            cursor.isNull(offset + 8) ? null : cursor.getLong(offset + 8), // userFatherId
+            cursor.isNull(offset + 9) ? null : cursor.getLong(offset + 9) // userSonId
         );
         return entity;
     }
@@ -161,6 +187,8 @@ public class SalesToGoodsDao extends AbstractDao<SalesToGoods, Long> {
         entity.setRealityPrice(cursor.getDouble(offset + 5));
         entity.setDiscountId(cursor.getLong(offset + 6));
         entity.setProfit(cursor.getDouble(offset + 7));
+        entity.setUserFatherId(cursor.isNull(offset + 8) ? null : cursor.getLong(offset + 8));
+        entity.setUserSonId(cursor.isNull(offset + 9) ? null : cursor.getLong(offset + 9));
      }
     
     @Override

@@ -1,12 +1,9 @@
 package com.tts.starsky.phonesweepcode.db.provider;
 
 import com.tts.starsky.phonesweepcode.db.bean.Sales;
-import com.tts.starsky.phonesweepcode.db.bean.SalesToGoods;
 import com.tts.starsky.phonesweepcode.db.dao.SalesDao;
 import com.tts.starsky.phonesweepcode.utile.SQL;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -26,8 +23,16 @@ public class SalesProvider extends DBProviderBase {
         return sales;
     }
 
-    public List<Sales> salesQueryAll(){
-        List<Sales> salesList = salesDao.queryBuilder().orderDesc(SalesDao.Properties.CreateTime).list();
+    public List<Sales> salesQueryAllByFatherUserId(long fatherId){
+        List<Sales> salesList = salesDao.queryBuilder()
+                .where(SalesDao.Properties.UserFatherId.eq(fatherId))
+                .orderDesc(SalesDao.Properties.CreateTime).list();
+        return salesList;
+    }
+    public List<Sales> salesQueryAllBySonUserId(long sonId){
+        List<Sales> salesList = salesDao.queryBuilder()
+                .where(SalesDao.Properties.UserSonId.eq(sonId))
+                .orderDesc(SalesDao.Properties.CreateTime).list();
         return salesList;
     }
 

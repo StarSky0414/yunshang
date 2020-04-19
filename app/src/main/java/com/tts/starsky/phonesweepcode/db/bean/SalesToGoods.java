@@ -1,18 +1,16 @@
 package com.tts.starsky.phonesweepcode.db.bean;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.ToMany;
-import org.greenrobot.greendao.annotation.ToOne;
-
-import java.util.List;
-import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.DaoException;
 import com.tts.starsky.phonesweepcode.db.dao.DaoSession;
+import com.tts.starsky.phonesweepcode.db.dao.DiscountDao;
 import com.tts.starsky.phonesweepcode.db.dao.GoodsInfoDao;
 import com.tts.starsky.phonesweepcode.db.dao.SalesToGoodsDao;
-import com.tts.starsky.phonesweepcode.db.dao.DiscountDao;
+
+import org.greenrobot.greendao.DaoException;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
+import org.greenrobot.greendao.annotation.ToOne;
 
 /**
  * 商品销售表
@@ -50,6 +48,10 @@ public class SalesToGoods {
 
     private double profit;
 
+
+    private Long userFatherId;
+    private Long userSonId;
+
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
     private transient DaoSession daoSession;
@@ -58,10 +60,10 @@ public class SalesToGoods {
     @Generated(hash = 776379832)
     private transient SalesToGoodsDao myDao;
 
-    @Generated(hash = 1349401009)
-    public SalesToGoods(Long _id, String salesId, String goodsId,
-            double intoStockPrice, double originalPrice, double realityPrice,
-            long discountId, double profit) {
+    @Generated(hash = 500804291)
+    public SalesToGoods(Long _id, String salesId, String goodsId, double intoStockPrice,
+            double originalPrice, double realityPrice, long discountId, double profit,
+            Long userFatherId, Long userSonId) {
         this._id = _id;
         this.salesId = salesId;
         this.goodsId = goodsId;
@@ -70,6 +72,8 @@ public class SalesToGoods {
         this.realityPrice = realityPrice;
         this.discountId = discountId;
         this.profit = profit;
+        this.userFatherId = userFatherId;
+        this.userSonId = userSonId;
     }
 
     @Generated(hash = 819063774)
@@ -250,6 +254,22 @@ public class SalesToGoods {
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getSalesToGoodsDao() : null;
+    }
+
+    public Long getUserFatherId() {
+        return this.userFatherId;
+    }
+
+    public void setUserFatherId(Long userFatherId) {
+        this.userFatherId = userFatherId;
+    }
+
+    public Long getUserSonId() {
+        return this.userSonId;
+    }
+
+    public void setUserSonId(Long userSonId) {
+        this.userSonId = userSonId;
     }
 
 

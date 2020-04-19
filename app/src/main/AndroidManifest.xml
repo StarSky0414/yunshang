@@ -31,15 +31,16 @@
         <activity android:name=".view.SignActivity">
 
         </activity>
+        <activity android:name=".view.SonUserActivity"/>
         <activity android:name=".view.activities.MainActivity">
+
+        </activity>
+        <activity android:name=".view.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity android:name=".view.LoginActivity">
-
         </activity>
         <activity android:name=".view.RegisterActivity">
 
@@ -59,6 +60,7 @@
         <activity android:name=".view.AddGoodInfoActivity" />
         <activity android:name=".view.DiscountActivity" />
         <activity android:name=".view.ContentActivity" />
+        <activity android:name=".view.SetActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
