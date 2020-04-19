@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@drawable/bg_2_1"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/ll_good"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:background="@drawable/bag"
         android:orientation="horizontal"
         android:paddingTop="80dp">
 
@@ -38,6 +38,7 @@
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:background="#99FFFFFF"
         android:id="@+id/rv_photo_wall"
         android:layout_width="400dp"
         android:layout_height="wrap_content"

@@ -34,7 +34,7 @@ public class GoodsInfoActivityList extends Activity implements RecyclerTouchList
     private OnActivityTouchListener touchListener;
     private GoodsInfoListAdapter mAdapter;
     private EditText et_discount_name;
-    private EditText et_discount_num;
+//    private EditText et_discount_num;
     private GoodsStockProvider  goodsStockProvider;
     private GoodsInfoLIstController  goodsInfoLIstController;
 
@@ -50,7 +50,7 @@ public class GoodsInfoActivityList extends Activity implements RecyclerTouchList
         // 初始化弹窗信息，用于添加数据
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_discount, null);
         et_discount_name = (EditText) view.findViewById(R.id.et_discount_name);
-        et_discount_num = (EditText) view.findViewById(R.id.et_discount_num);
+//        et_discount_num = (EditText) view.findViewById(R.id.et_discount_num);
 
         // 设定添加按钮的监听
         ImageView iv_add_discount = (ImageView) findViewById(R.id.iv_add_discount);
@@ -159,22 +159,22 @@ public class GoodsInfoActivityList extends Activity implements RecyclerTouchList
         View view = LayoutInflater.from(this).inflate(R.layout.dialog_goods_info, null);
         builder.setView(view);
         final EditText et_discount_name = (EditText) view.findViewById(R.id.et_discount_name);
-        final EditText et_discount_num = (EditText) view.findViewById(R.id.et_discount_num);
+//        final EditText et_discount_num = (EditText) view.findViewById(R.id.et_discount_num);
 
         if (goodsInfo != null) {
-            int newStockNum = goodsInfo.getNewStockNum();
+//            int newStockNum = goodsInfo.getNewStockNum();
             double nowPrice = goodsInfo.getNowPrice();
             et_discount_name.setText(String.valueOf(nowPrice));
-            et_discount_num.setText(String.valueOf(newStockNum));
+//            et_discount_num.setText(String.valueOf(newStockNum));
 
         }
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                String newStockNum = et_discount_name.getText().toString();
-                String discountNum = et_discount_num.getText().toString();
+                String discountNum = et_discount_name.getText().toString();
+//                String discountNum = et_discount_num.getText().toString();
 
-                goodsInfo.setNewStockNum(Integer.valueOf(newStockNum));
+//                goodsInfo.setNewStockNum(Double.valueOf(newStockNum));
                 goodsInfo.setNowPrice(Double.valueOf(discountNum));
                 goodsInfoLIstController.changeGoodsInfo(goodsInfo);
 

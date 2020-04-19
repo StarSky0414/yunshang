@@ -31,7 +31,7 @@ public class AddGoodInfoActivity extends Activity implements View.OnClickListene
     private EditText et_barcode;
     private EditText et_goodsName;
     private EditText et_nowPriceAll;
-    private EditText et_goods_stock_num;
+//    private EditText et_goods_stock_num;
     private String theresult;
     private GoodsInfo goods_info;
     private GoodsInfoController goodsInfoController;
@@ -71,7 +71,7 @@ public class AddGoodInfoActivity extends Activity implements View.OnClickListene
         et_barcode = (EditText) findViewById(R.id.et_barcode);
         et_goodsName = (EditText) findViewById(R.id.et_goodsName);
         et_nowPriceAll = (EditText) findViewById(R.id.et_nowPriceAll);
-        et_goods_stock_num = (EditText) findViewById(R.id.et_goods_stock_num);
+//        et_goods_stock_num = (EditText) findViewById(R.id.et_goods_stock_num);
 
         et_intoPriceAll = (EditText) findViewById(R.id.et_intoPriceAll);
         et_intoGoodsNum = (EditText) findViewById(R.id.et_intoGoodsNum);
@@ -99,12 +99,12 @@ public class AddGoodInfoActivity extends Activity implements View.OnClickListene
             // 如果数据为空，那就是没添加过数据，进行数据录入
             if (goods_info.getGoodsName()==null) {
                 et_goodsName.setHint("未添加数据");
-                et_goods_stock_num.setHint("0");
+//                et_goods_stock_num.setHint("0");
             } else {
                 // 数据库信息添加到页面上
                 et_goodsName.setText(goods_info.getGoodsName());
                 et_nowPriceAll.setText(String.valueOf(goods_info.getNowPrice()));
-                et_goods_stock_num.setText(String.valueOf(goods_info.getNewStockNum()));
+//                et_goods_stock_num.setText(String.valueOf(goods_info.getNewStockNum()));
             }
             // 查看商品信息
             System.out.println("===========" + goods_info);
@@ -129,7 +129,7 @@ public class AddGoodInfoActivity extends Activity implements View.OnClickListene
                 // 现在售价
                 double etNowAllPrice = Double.valueOf(et_nowPriceAll.getText().toString());
                 // 库存数量
-                Integer goodsStockNum =  et_goods_stock_num.getText().toString().equals("")?0:Integer.valueOf(et_goods_stock_num.getText().toString());
+                Integer goodsStockNum =  0;
 
                 String etBarcode = et_barcode.getText().toString();
 
@@ -197,7 +197,7 @@ public class AddGoodInfoActivity extends Activity implements View.OnClickListene
      */
     private void clean(){
         goods_info = null;
-        et_goods_stock_num.setText("");
+//        et_goods_stock_num.setText("");
         et_nowPriceAll.setText("");
         et_barcode.setText("");
         et_goodsName.setText("");

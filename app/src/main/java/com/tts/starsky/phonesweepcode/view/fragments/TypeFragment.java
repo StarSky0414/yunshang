@@ -3,6 +3,7 @@ package com.tts.starsky.phonesweepcode.view.fragments;
 import android.Manifest;
 import android.app.Fragment;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
@@ -17,8 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tts.starsky.phonesweepcode.R;
+import com.tts.starsky.phonesweepcode.controller.SalesController;
 import com.tts.starsky.phonesweepcode.controller.SignInfoController;
 import com.tts.starsky.phonesweepcode.controller.UserController;
+import com.tts.starsky.phonesweepcode.db.bean.Sales;
 import com.tts.starsky.phonesweepcode.db.bean.SignInfo;
 import com.tts.starsky.phonesweepcode.db.bean.UserInfo;
 import com.tts.starsky.phonesweepcode.utile.ServiceMessage;
@@ -28,9 +31,12 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class TypeFragment extends Fragment implements View.OnClickListener{
+import im.dacer.androidcharts.LineView;
+
+public class TypeFragment extends Fragment implements View.OnClickListener {
 
     private View fragment_type;
     private WifiManager mWifiManager;
@@ -40,37 +46,77 @@ public class TypeFragment extends Fragment implements View.OnClickListener{
     private TextView sign_mon_text;
     private SignInfoController signInfoController;
     private ImageView sign_address;
+    private LineView lineView;
+    private SalesController salesController;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        fragment_type = inflater.inflate(R.layout.activity_sign, null);
-        serviceMessage = new ServiceMessage(getContext());
+
         EventBus.getDefault().register(this);
-        initSon();
+        if (UserController.isAdmin()) {
+            initFather(inflater);
+        } else {
+            initSon(inflater);
+        }
         return fragment_type;
     }
 
+    private void initFather(LayoutInflater inflater) {
+        fragment_type = inflater.inflate(R.layout.activity_statistics, null);
+        salesController = new SalesController();
 
+        // X轴设定时间
+        ArrayList<String> bottomTextList = new ArrayList<String>();
+        // 只有一条数据
+        ArrayList<ArrayList<Integer>> dataLists = new ArrayList<ArrayList<Integer>>();
+        // Y轴数据
+        ArrayList<Integer> integers = new ArrayList<Integer>();
+        // 引用数据类型先设定可以
+        dataLists.add(integers);
+
+        List<Sales> salesList = salesController.showSalesAll();
+        for (int i = 0; i < salesList.size(); i++) {
+            Sales sales = salesList.get(i);
+            String createTime = sales.getCreateTime();
+            createTime = createTime.substring(0, 10);
+            if (bottomTextList.indexOf(createTime) == -1) {
+                bottomTextList.add(createTime);
+            }
+            if (integers.size()<bottomTextList.size()){
+                integers.add(0);
+            }
+            int i1 = bottomTextList.size() - 1;
+            Integer integer = integers.get(i1)==null?0:integers.get(i1);
+            integers.set(i1, integer + (int) sales.getRealityPrice());
+
+        }
+
+
+        lineView = (LineView) fragment_type.findViewById(R.id.line_view);
+        lineView.setDrawDotLine(false); //optional
+        lineView.setShowPopup(LineView.SHOW_POPUPS_MAXMIN_ONLY); //optional
+        lineView.setBottomTextList(bottomTextList);
+        lineView.setColorArray(new int[]{Color.BLACK, Color.GREEN, Color.GRAY, Color.CYAN});
+        lineView.setDataList(dataLists); //or lineView.setFloatDataList(floatDataLists)
+    }
 
 
     // 页面信息初始化
-    private void initSon() {
+    private void initSon(LayoutInflater inflater) {
+        fragment_type = inflater.inflate(R.layout.activity_sign, null);
+        serviceMessage = new ServiceMessage(getContext());
         sign_address_text = (TextView) fragment_type.findViewById(R.id.sign_address_text);
         sign_sun_text = (TextView) fragment_type.findViewById(R.id.sign_sun_text);
         sign_mon_text = (TextView) fragment_type.findViewById(R.id.sign_mon_text);
         sign_address = (ImageView) fragment_type.findViewById(R.id.sign_address);
-
         //设置签到监听
         sign_address.setOnClickListener(this);
-
         // 初始化控制器
         signInfoController = new SignInfoController();
-
         // 页面加载数据
         signView();
-
         // 签到权限校验
         checkLoaction();
     }
@@ -102,7 +148,7 @@ public class TypeFragment extends Fragment implements View.OnClickListener{
                     signView();
                     Toast.makeText(getContext(), "打卡成功！", Toast.LENGTH_SHORT).show();
                     SignInfoController.SIGN_OK = false;
-                }else {
+                } else {
                     Toast.makeText(getContext(), "未连接到当前指定打开Wifi！", Toast.LENGTH_SHORT).show();
 
                 }
@@ -112,7 +158,8 @@ public class TypeFragment extends Fragment implements View.OnClickListener{
 
 
     /**
-     *  用于校验WiFi名，控制是否可以签到，暂未校验
+     * 用于校验WiFi名，控制是否可以签到，暂未校验
+     *
      * @param wifiInfo
      */
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
@@ -127,14 +174,14 @@ public class TypeFragment extends Fragment implements View.OnClickListener{
             UserController userController = new UserController();
             UserInfo userInfo = userController.queryUserInfo(fatherUserId);
             String wiFiName = userInfo.getWiFiName();
-            if (wiFiName == null || wiFiName.equals("")){
+            if (wiFiName == null || wiFiName.equals("")) {
                 sign_address_text.setText("签到功能管理员未开启！");
                 return;
-            }else if(wiFiName.equals(macAddress)){
+            } else if (wiFiName.equals(macAddress)) {
                 sign_address_text.setText(macAddress);
-                SignInfoController.SIGN_OK=true;
+                SignInfoController.SIGN_OK = true;
                 return;
-            }else{
+            } else {
                 sign_address_text.setText("未连接到当前指定打开Wifi！");
             }
 

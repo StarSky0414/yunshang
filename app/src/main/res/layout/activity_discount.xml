@@ -2,12 +2,13 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@drawable/bg_2_4"
     android:layout_height="match_parent">
     <RelativeLayout
         android:id="@+id/rl_discount"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:background="@color/colorAccent">
+        android:background="@color/trime">
 
         <ImageView
             android:id="@+id/iv_add_discount"

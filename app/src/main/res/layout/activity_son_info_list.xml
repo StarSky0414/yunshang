@@ -2,6 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="@drawable/bg_2_5"
     android:layout_height="match_parent">
     <RelativeLayout
         android:id="@+id/rl_discount"
